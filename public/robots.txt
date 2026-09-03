@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /berita
+Allow: /berita/
+Allow: /peta
+Allow: /pengaduan
+Allow: /lapor-ronda
+
+User-agent: Googlebot
+Allow: /
+Allow: /berita/
+
+User-agent: Googlebot-News
+Allow: /
+Allow: /berita/
+
+Sitemap: https://tentrem.ponorogo.go.id/sitemap.xml

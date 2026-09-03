@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/berita", "destination": "/index.html" },
+    { "source": "/berita/:slug*", "destination": "/index.html" },
+    { "source": "/survey", "destination": "/index.html" },
+    { "source": "/aduan", "destination": "/index.html" },
+    { "source": "/pengaduan", "destination": "/index.html" }
+  ]
+}

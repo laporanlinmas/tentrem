@@ -1,0 +1,500 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   TENTREM — Main Stylesheet  v5.1
+   Tugurejo Nyaman Tanggap Responsif Modern
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Custom Properties (design tokens) ─────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --color-brand-primary:   #10b981; /* emerald-500 */
+  --color-brand-secondary: #06b6d4; /* cyan-500    */
+  --color-brand-accent:    #8b5cf6; /* violet-500  */
+  --color-brand-teal:      #14b8a6; /* teal-500    */
+
+  /* Surface */
+  --surface-bg:   #f8fafc;
+  --surface-card: rgba(255,255,255,0.82);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Hero */
+  --hero-overlay-from: rgba(2,6,23,0.85);
+  --hero-overlay-to:   rgba(2,6,23,0.40);
+
+  /* Z-index scale */
+  --z-dropdown: 30;
+  --z-sticky:   40;
+  --z-modal:    50;
+  --z-toast:    60;
+}
+
+html.dark {
+  --surface-bg:   #020617;
+  --surface-card: rgba(15,23,42,0.82);
+  --hero-overlay-from: rgba(2,6,23,0.92);
+  --hero-overlay-to:   rgba(2,6,23,0.55);
+}
+
+/* ── Tailwind directives ────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Skip-link (aksesibilitas keyboard) ─────────────────────────────────── */
+@layer components {
+  .skip-link {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .skip-link:focus {
+    position: fixed;
+    left: 1rem; top: 1rem;
+    z-index: 100;
+    width: auto; height: auto;
+    margin: 0;
+    padding: .5rem 1rem;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    border-radius: .5rem;
+    background: #fff;
+    color: #0f172a;
+    font-size: .875rem;
+    font-weight: 600;
+    outline: none;
+    box-shadow: 0 0 0 2px #2563eb, 0 10px 25px rgba(0,0,0,.15);
+  }
+  .dark .skip-link:focus {
+    background: #0f172a;
+    color: #f8fafc;
+    box-shadow: 0 0 0 2px #60a5fa, 0 10px 25px rgba(0,0,0,.35);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -45px) scale(1.1); }
+  66%       { transform: translate(-20px, 20px) scale(.92); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientX {
+  0%, 100% { background-position: left center; }
+  50%       { background-position: right center; }
+}
+
+@keyframes radar {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes staticShift {
+  0%   { background-position: 0 0; }
+  50%  { background-position: 2px 2px; }
+  100% { background-position: -2px -2px; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0); }
+  50%       { box-shadow: 0 0 24px 6px rgba(14,165,233,.3); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATION UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.animate-blob          { animation: blob 8s ease-in-out infinite; }
+.animate-slide-up      { animation: slideUp .45s cubic-bezier(.22,1,.36,1) forwards; }
+.animate-gradient-x    { animation: gradientX 10s ease infinite; background-size: 200% auto; }
+.animate-radar         { animation: radar 2s linear infinite; }
+.animate-float         { animation: floatY 4s ease-in-out infinite; }
+.animate-shimmer       { animation: shimmer 2.5s linear infinite; background-size: 200% auto; }
+.animate-pulse-glow    { animation: pulseGlow 2.5s ease-in-out infinite; }
+.animate-fade-in-scale { animation: fadeInScale .55s cubic-bezier(.22,1,.36,1) forwards; }
+.animate-spin-slow     { animation: spinSlow 12s linear infinite; }
+
+.animation-delay-100  { animation-delay: 100ms; }
+.animation-delay-200  { animation-delay: 200ms; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.reveal-delay-1 { transition-delay:  80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLASS PANEL & MODERN CARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+}
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.glass-card-subtle {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.dark .glass-card-subtle {
+  background: rgba(30, 41, 59, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Card hover lift ─────────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(14, 165, 233, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.05);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(14, 165, 233, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPECIAL EFFECTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Radar sweep */
+.radar-sweep {
+  background: conic-gradient(from 0deg, transparent 70%, rgba(14, 165, 233, .4) 100%);
+  border-radius: 50%;
+}
+
+/* WhatsApp chat background */
+.wa-bg {
+  background-color: #E5DDD5;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239ba9b4' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.dark .wa-bg { background-color: #0B141A; }
+
+/* Video overlay (blokir tombol Drive) */
+.video-overlay-block {
+  position: absolute;
+  z-index: 10;
+  background: #000;
+  pointer-events: all;
+  cursor: default;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY & GRADIENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.text-shimmer-tentrem {
+  background: linear-gradient(90deg,
+    #0284c7 0%, #3b82f6 25%, #6366f1 50%, #06b6d4 75%, #0284c7 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.text-shimmer-gold {
+  background: linear-gradient(90deg,
+    #f59e0b 0%, #fbbf24 30%, #fcd34d 50%, #f59e0b 70%, #d97706 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3.5s linear infinite;
+}
+
+.glow-border { position: relative; }
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(14, 165, 233, .5), rgba(99, 102, 241, .5));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .3s ease;
+  filter: blur(6px);
+}
+.glow-border:hover::after { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.custom-scrollbar::-webkit-scrollbar       { width: 5px; height: 5px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PHOSPHOR ICONS — pastikan font ter-load
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[class^="ph-"]:empty,
+[class*=" ph-"]:empty {
+  display: inline-block;
+  min-width: 1em;
+  min-height: 1em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE & TRANSITIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+html           { color-scheme: light; --hero-bg: #f8fafc; }
+html.dark      { color-scheme: dark;  --hero-bg: #020617; }
+
+/* ── Text size boost untuk konten halaman (bukan topbar/sidebar) ──────── */
+/* Boost teks di main content saja, bukan nav/aside */
+main .text-xs,
+section .text-xs,
+article .text-xs,
+div:not(nav):not(aside) > .text-xs  { font-size: 0.82rem  !important; line-height: 1.5  !important; }
+
+main .text-sm,
+section .text-sm,
+article .text-sm,
+div:not(nav):not(aside) > .text-sm  { font-size: 0.93rem  !important; line-height: 1.55 !important; }
+
+main .text-base,
+section .text-base,
+article .text-base { font-size: 1.08rem !important; line-height: 1.6 !important; }
+
+main .text-lg,  section .text-lg  { font-size: 1.2rem  !important; }
+main .text-xl,  section .text-xl  { font-size: 1.35rem !important; }
+main .text-2xl, section .text-2xl { font-size: 1.6rem  !important; }
+main .text-3xl, section .text-3xl { font-size: 2rem    !important; }
+main .text-4xl, section .text-4xl { font-size: 2.5rem  !important; }
+
+/* Pastikan nav & aside TIDAK kena boost apapun */
+nav, nav *, aside, aside * { font-size: revert !important; }
+
+/*
+  PENTING: Jangan gunakan global * { transition } karena akan menimpa
+  animasi khusus (page-enter/exit, reveal, blob) dan menyebabkan glitch.
+  Sebagai gantinya, target hanya properti warna pada elemen non-animasi.
+*/
+
+/* Smooth color-only transition untuk dark mode — HANYA pada elemen biasa */
+:is(
+  body, main, section, article, aside, header, footer, nav,
+  div:not([class*="animate-"]):not([class*="page-"]):not(.reveal),
+  p, h1, h2, h3, h4, h5, h6, span, li, ul, ol,
+  a, button, label, input, textarea, select,
+  td, th, tr, table
+):not([class*="transition-"]):not([style*="transition"]) {
+  transition-property: background-color, border-color, color, box-shadow, fill, stroke;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Pastikan elemen animasi TIDAK dapat global transition */
+[class*="animate-"],
+.reveal,
+.page-enter,
+.page-exit,
+[class*="transition-"],
+[class*="duration-"] {
+  /* Biarkan Tailwind / animasi mereka sendiri yang kontrol */
+}
+
+/* Will-change hints untuk body saat toggle mode */
+body { will-change: background-color, color; }
+
+/* Hero description text-shadow for readability over photo */
+.hero-desc {
+  text-shadow: 0 1px 8px rgba(2,6,23,0.85), 0 2px 24px rgba(2,6,23,0.60);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PERFORMANCE — content-visibility & contain
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Lazy-render off-screen sections to reduce paint cost */
+.section-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px; /* rough height estimate */
+}
+
+/* Layout containment for card grids */
+.contain-layout {
+  contain: layout style;
+}
+
+/* ── Image optimasi ────────────────────────────────────────────────────── */
+img { max-width: 100%; }
+
+/* The Hero always owns its height; global image defaults must never collapse it. */
+.hero-panorama-image { height: 100% !important; }
+
+/* Hero panorama canvas/viewer — GPU layer hint */
+.hero-bg-img {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-panorama-image {
+  height: 100% !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECURITY — prevent CSS-based data exfil (dangling markup)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Prevent URL-based data exfiltration via CSS */
+a[href^="javascript:"] { pointer-events: none; display: none !important; }
+a[href^="data:"]       { pointer-events: none; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  nav, footer, .chatbot-float, .visitor-counter, [aria-hidden="true"] {
+    display: none !important;
+  }
+  body { background: #fff !important; color: #000 !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION — respect user preference
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE TRANSITIONS — fade out / fade in between routes
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Prevent layout shift when overlays appear/disappear */
+html {
+  scrollbar-gutter: stable;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes page-fade-out {
+  from { opacity: 1; transform: translateY(0);   }
+  to   { opacity: 0; transform: translateY(4px); }
+}
+
+@keyframes progress {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(0%);    }
+  100% { transform: translateX(100%);  }
+}
+
+/* #page-content — GPU layer, isolasi stacking context */
+#page-content {
+  will-change: opacity, transform;
+  isolation: isolate;
+  /* Default opacity 1, tidak ada flash saat konten pertama kali muncul */
+  opacity: 1;
+}
+
+.page-enter {
+  animation: page-fade-in 260ms cubic-bezier(.25, .46, .45, .94) both;
+}
+
+.page-exit {
+  animation: page-fade-out 180ms cubic-bezier(.55, 0, 1, .45) both;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PETA FULLSCREEN — container mengisi seluruh layar
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#website-map-container:fullscreen,
+#website-map-container:-webkit-full-screen,
+#website-map-container:-moz-full-screen,
+#website-map-container:-ms-fullscreen {
+  width: 100dvw !important;
+  height: 100dvh !important;
+  border-radius: 0 !important;
+  border: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#website-map-container:fullscreen #website-leaflet-map,
+#website-map-container:-webkit-full-screen #website-leaflet-map,
+#website-map-container:-moz-full-screen #website-leaflet-map,
+#website-map-container:-ms-fullscreen #website-leaflet-map {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
