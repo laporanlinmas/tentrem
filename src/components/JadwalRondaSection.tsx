@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import {
-  User, Users, Clock,
+  User, Users,
   AlertTriangle,
   MapPin, Calendar, ArrowRight } from 'lucide-react';
 import { db } from '@/lib/firebase';
@@ -64,9 +64,6 @@ export function getTodayCycleDay(startDate: string, total: number): number {
 }
 
 /* ─────────────── Constants ────────────────────────── */
-const JAM_MULAI   = '21:30';
-const JAM_SELESAI = '02:00';
-
 function todayName() {
   return ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][new Date().getDay()];
 }
@@ -184,25 +181,9 @@ export default function JadwalRondaSection({ onNavigateDetail }: JadwalRondaSect
               <p className="text-sm text-white/60 font-medium">{dateStr.replace(today + ', ', '')}</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                  <Clock className="w-4 h-4 text-emerald-400" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-wider">Mulai Jaga</p>
-                  <p className="text-lg font-black text-white font-mono">{JAM_MULAI} <span className="text-xs font-semibold text-white/60">WIB</span></p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-8 h-8 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center shrink-0">
-                  <Clock className="w-4 h-4 text-teal-400" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-wider">Selesai Jaga</p>
-                  <p className="text-lg font-black text-white font-mono">{JAM_SELESAI} <span className="text-xs font-semibold text-white/60">WIB</span></p>
-                </div>
-              </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-white/50">Rotasi kelompok</p>
+              <p className="mt-1 text-lg font-black text-white">{activeCount} kelompok bergilir</p>
             </div>
           </div>
 
@@ -210,7 +191,7 @@ export default function JadwalRondaSection({ onNavigateDetail }: JadwalRondaSect
             <span className="flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-emerald-400" /> Poskamling RT 01/RW 01 · Desa Tugurejo
             </span>
-            <span className="text-emerald-300 font-semibold font-mono">Durasi: 4,5 Jam · {activeCount} Kelompok</span>
+            <span className="text-emerald-300 font-semibold">Siklus bergilir · {activeCount} kelompok</span>
           </div>
         </div>
 

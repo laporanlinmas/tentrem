@@ -458,7 +458,7 @@ export default function StrukturSection() {
               color="amber"
               badge="Pelaksana"
               jabatan="Anggota Poskamling"
-              nama={`${anggotaList.length} Personel Aktif`}
+              nama={`${anggotaList.length} Personel Terdaftar`}
             />
           </MobileTreeNode>
         </div>
@@ -639,7 +639,7 @@ export default function StrukturSection() {
               <Card
                 badge="Pelaksana Lapangan"
                 jabatan="Anggota Poskamling"
-                nama={`${anggotaList.length} Personel Terdaftar (Aktif)`}
+                nama={`${anggotaList.length} Personel Terdaftar`}
                 level="anggota"
                 isCenter={true}
               />
@@ -760,9 +760,6 @@ export default function StrukturSection() {
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
                             {m.unit}
-                          </span>
-                          <span className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
-                            ● Aktif
                           </span>
                         </div>
                       </div>
