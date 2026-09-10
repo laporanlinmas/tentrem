@@ -292,6 +292,8 @@ export default function BeritaPage({
     if (target) {
       setActiveArticle(target);
       trackRealView(target);
+    } else {
+      setActiveArticle(null);
     }
   }, [selectedSlugOrId, beritaList]);
 
@@ -509,7 +511,7 @@ export default function BeritaPage({
     const text = encodeURIComponent(
       `*${item.judul}*\n\n` +
       `${item.ringkasan}\n\n` +
-      `Baca berita selengkapnya di Portal Resmi Desa Tugurejo:\n${url}`
+      `Baca berita selengkapnya di Poskamling TENTREM RT 01 RW 01 Tugurejo:\n${url}`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
