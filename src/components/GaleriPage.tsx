@@ -488,7 +488,7 @@ export default function GaleriPage({ onBack }: GaleriPageProps) {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300"
         style={{ overflowX: 'hidden' }}>
 
-        <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">

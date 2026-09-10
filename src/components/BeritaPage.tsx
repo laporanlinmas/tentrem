@@ -460,8 +460,8 @@ export default function BeritaPage({
       const listSchema = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: 'Warta & Berita Resmi Desa Tugurejo',
-        description: 'Kumpulan berita resmi, agenda kegiatan, pembangunan, dan ketertiban Desa Tugurejo.',
+        name: 'Berita & Kegiatan Poskamling RT 01 RW 01 Tugurejo',
+        description: 'Kumpulan berita, agenda kegiatan, dan informasi keamanan lingkungan Poskamling RT 01 RW 01 Tugurejo.',
         itemListElement: beritaList.slice(0, 20).map((b, idx) => ({
           '@type': 'ListItem',
           position: idx + 1,
@@ -574,7 +574,7 @@ export default function BeritaPage({
         
         {/* Navigation Sticky Topbar */}
         <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-sm">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             
             <div className="flex items-center gap-3">
               <button
@@ -625,7 +625,7 @@ export default function BeritaPage({
         <main
           itemScope
           itemType="https://schema.org/NewsArticle"
-          className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8"
         >
           {/* Hidden metadata for crawler indexing */}
           <meta itemProp="inLanguage" content="id-ID" />
@@ -638,7 +638,7 @@ export default function BeritaPage({
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 overflow-x-auto pb-1">
             <button onClick={onBack} className="hover:text-emerald-600 cursor-pointer">Beranda</button>
             <ChevronRight className="w-3.5 h-3.5 shrink-0" />
-            <button onClick={handleBackToList} className="hover:text-emerald-600 cursor-pointer">Warta Desa</button>
+            <button onClick={handleBackToList} className="hover:text-emerald-600 cursor-pointer">Berita &amp; Kegiatan</button>
             <ChevronRight className="w-3.5 h-3.5 shrink-0" />
             <span className="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[200px] sm:max-w-xs">{activeArticle.judul}</span>
           </nav>
@@ -848,7 +848,7 @@ export default function BeritaPage({
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-extrabold">
               <Newspaper className="w-4 h-4" />
-              <span>Portal Warta Resmi Desa</span>
+              <span>Berita &amp; Kegiatan Poskamling</span>
             </div>
           </div>
 
@@ -856,13 +856,13 @@ export default function BeritaPage({
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
           <button type="button" onClick={onBack} className="hover:text-emerald-600 dark:hover:text-emerald-400 font-semibold flex items-center gap-1 cursor-pointer">
             <Home className="w-3.5 h-3.5" /> Beranda
           </button>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-slate-900 dark:text-white font-bold">Berita Desa</span>
+          <span className="text-slate-900 dark:text-white font-bold">Berita &amp; Kegiatan</span>
         </nav>
         
         {/* Banner Title & Search Header */}
@@ -872,7 +872,7 @@ export default function BeritaPage({
               <Sparkles className="w-3.5 h-3.5" /> Publikasi &amp; Transparansi Desa
             </div>
             <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-              Warta &amp; Berita Desa Tugurejo
+              Berita &amp; Kegiatan Poskamling RT 01 RW 01 Tugurejo
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
               Arsip lengkap kegiatan masyarakat, pelayanan publik, keamanan lingkungan, dan pembangunan desa.
