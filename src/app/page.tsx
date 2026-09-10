@@ -1,16 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
-import {
-  ShieldCheck,
-  ArrowRight,
-  Camera,
-  Newspaper,
-  GitBranch,
-  Drum,
-  Map,
-  Megaphone,
-  Play } from 'lucide-react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import JadwalRondaSection from '@/components/JadwalRondaSection';
@@ -523,7 +513,6 @@ export default function HomePage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] font-extrabold uppercase tracking-wider mb-2">
-                      <ShieldCheck className="w-3 h-3" />
                       Layanan &amp; Informasi Publik
                     </div>
                     <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
@@ -538,16 +527,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('profil')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-teal-400/60 dark:hover:border-teal-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-200">
-                      <Play className="w-4 h-4 ml-0.5" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate">
                         Profil Desa &amp; Video
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Gambaran wilayah &amp; profil TENTREM</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-teal-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Berita */}
@@ -555,16 +540,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('berita')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-emerald-400/60 dark:hover:border-emerald-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-200">
-                      <Newspaper className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors truncate">
                         Warta &amp; Berita Desa
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Berita, pengumuman &amp; agenda desa</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Pengaduan */}
@@ -572,16 +553,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('aduan')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-orange-400/60 dark:hover:border-orange-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-200">
-                      <Megaphone className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors truncate">
                         Kanal Pengaduan Warga
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Laporan &amp; pelacakan tiket 24 jam</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Struktur */}
@@ -589,16 +566,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('struktur')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-blue-400/60 dark:hover:border-blue-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
-                      <GitBranch className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                         Struktur Satkamling
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Bagan komando &amp; tugas Satlinmas</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Galeri */}
@@ -606,16 +579,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('galeri')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-cyan-400/60 dark:hover:border-cyan-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-200">
-                      <Camera className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors truncate">
                         Galeri Dokumentasi
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Arsip foto ronda &amp; kegiatan desa</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-cyan-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Kentongan */}
@@ -623,16 +592,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('kentongan')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-amber-400/60 dark:hover:border-amber-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-200">
-                      <Drum className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors truncate">
                         Isyarat Kentongan
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">7 kode &amp; simulator bunyi akustik</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
 
                   {/* Card Peta */}
@@ -640,16 +605,12 @@ export default function HomePage() {
                     onClick={() => navigateTo('peta')}
                     className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-indigo-400/60 dark:hover:border-indigo-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-200">
-                      <Map className="w-4 h-4" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
                         Peta Wilayah Digital
                       </p>
                       <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Peta interaktif &amp; pos ronda</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-indigo-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </div>
                 </div>
               </section>

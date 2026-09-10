@@ -2,9 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Home, Map, Megaphone, Star, Sun, Moon, X, Menu,
-  Newspaper, Lock, GitBranch, Drum,
-  Camera, Play, Package,
+  Sun, Moon, X, Menu, Lock,
 } from 'lucide-react';
 
 const ADMIN_URL = import.meta.env.VITE_WEB_ADMIN || 'https://tentremadmin.vercel.app/login';
@@ -18,16 +16,16 @@ export interface HeaderProps {
 }
 
 export const NAV_ITEMS = [
-  { id: 'home',      label: 'Beranda',       Icon: Home,      color: 'text-emerald-400' },
-  { id: 'profil',    label: 'Profil',        Icon: Play,      color: 'text-teal-400' },
-  { id: 'berita',    label: 'Berita',        Icon: Newspaper, color: 'text-sky-400' },
-  { id: 'aduan',     label: 'Aduan',         Icon: Megaphone, color: 'text-orange-400' },
-  { id: 'struktur',  label: 'Struktur',      Icon: GitBranch, color: 'text-blue-400' },
-  { id: 'galeri',    label: 'Galeri',        Icon: Camera,    color: 'text-cyan-400' },
-  { id: 'kentongan',  label: 'Kentongan',     Icon: Drum,    color: 'text-amber-400' },
-  { id: 'inventaris', label: 'Inventaris',    Icon: Package, color: 'text-violet-400' },
-  { id: 'peta',       label: 'Peta',          Icon: Map,     color: 'text-indigo-400' },
-  { id: 'survei',     label: 'Kritik & Saran', Icon: Star,   color: 'text-yellow-400' },
+  { id: 'home',       label: 'Beranda' },
+  { id: 'profil',     label: 'Profil' },
+  { id: 'berita',     label: 'Berita' },
+  { id: 'aduan',      label: 'Aduan' },
+  { id: 'struktur',   label: 'Struktur' },
+  { id: 'galeri',     label: 'Galeri' },
+  { id: 'kentongan',  label: 'Kentongan' },
+  { id: 'inventaris', label: 'Inventaris' },
+  { id: 'peta',       label: 'Peta' },
+  { id: 'survei',     label: 'Kritik & Saran' },
 ] as const;
 
 export default function Header({
@@ -180,7 +178,7 @@ export default function Header({
 
             {/* Desktop nav */}
             <div className="hidden xl:flex items-center gap-0.5">
-              {NAV_ITEMS.map(({ id, label, Icon }) => {
+              {NAV_ITEMS.map(({ id, label }) => {
                 const isActive = currentPage === id;
                 return (
                   <button
@@ -188,13 +186,12 @@ export default function Header({
                     type="button"
                     onClick={() => handleNavClick(id)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`relative px-2.5 py-1.5 rounded-xl text-[11px] xl:text-xs font-bold transition-all flex items-center gap-1 cursor-pointer whitespace-nowrap ${
+                    className={`relative px-2.5 py-1.5 rounded-xl text-[11px] xl:text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                       isActive
-                        ? 'text-white bg-white/20 shadow-sm'
+                        ? 'text-white bg-white/15 shadow-sm'
                         : 'text-white/80 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <Icon className={`w-3 h-3 shrink-0 ${isActive ? 'text-emerald-300' : 'text-white/70'}`} />
                     <span>{label}</span>
                   </button>
                 );
@@ -331,7 +328,7 @@ export default function Header({
         >
           <p className="text-[9px] font-extrabold uppercase tracking-[0.14em] text-slate-500 px-2 mb-2">Menu Utama</p>
 
-          {NAV_ITEMS.map(({ id, label, Icon, color }, i) => {
+          {NAV_ITEMS.map(({ id, label }, i) => {
             const isActive = currentPage === id;
             return (
               <button
@@ -340,9 +337,9 @@ export default function Header({
                 onClick={() => handleNavClick(id)}
                 aria-current={isActive ? 'page' : undefined}
                 className={`
-                  w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer text-left
+                  w-full flex items-center px-3 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer text-left
                   ${isActive
-                    ? 'bg-gradient-to-r from-emerald-600/90 to-teal-600/90 text-white shadow-md shadow-emerald-900/30'
+                    ? 'bg-emerald-600/90 text-white shadow-md shadow-emerald-900/30'
                     : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
                   }
                 `}
@@ -353,11 +350,6 @@ export default function Header({
                   transition: `background-color 150ms ease, color 150ms ease, box-shadow 150ms ease, transform 260ms cubic-bezier(.32,0,.67,0) ${i * 18}ms, opacity 240ms ease ${i * 18}ms`,
                 }}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                  isActive ? 'bg-white/20' : 'bg-slate-800'
-                }`}>
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : color}`} />
-                </div>
                 <span className="flex-1 truncate">{label}</span>
                 {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />}
               </button>

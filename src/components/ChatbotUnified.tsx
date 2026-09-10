@@ -71,10 +71,10 @@ interface ComplaintDraft {
 const NAV_GRADIENT = 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)';
 
 const QUICK_ACTIONS: ChatAction[] = [
-  { label: '📢 Lapor Aduan Warga',      payload: '__navigate:aduan',      type: 'text', icon: <Megaphone size={13} /> },
-  { label: '🔍 Cek Status Tiket',       payload: 'cek status tiket',      type: 'text', icon: <Clock size={13} /> },
-  { label: '📰 Warta & Berita Desa',    payload: '__navigate:berita',     type: 'text', icon: <Newspaper size={13} /> },
-  { label: '💬 Hubungi Petugas Linmas', payload: 'hubungi petugas',       type: 'text', icon: <WhatsAppIcon size={13} /> },
+  { label: 'Lapor Aduan Warga',      payload: '__navigate:aduan',      type: 'text', icon: <Megaphone size={13} /> },
+  { label: 'Cek Status Tiket',       payload: 'cek status tiket',      type: 'text', icon: <Clock size={13} /> },
+  { label: 'Warta & Berita Desa',    payload: '__navigate:berita',     type: 'text', icon: <Newspaper size={13} /> },
+  { label: 'Hubungi Petugas Linmas', payload: 'hubungi petugas',       type: 'text', icon: <WhatsAppIcon size={13} /> },
 ];
 
 const KATEGORI_LIST = [
@@ -256,7 +256,6 @@ function ActionButtons({ actions, onAction }: { actions: ChatAction[]; onAction:
       {actions.map((act, i) => (
         <button key={i} onClick={() => onAction(act)}
           className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-slate-600 shadow-sm transition-all hover:border-blue-400 hover:text-blue-600 active:scale-95 truncate">
-          <span className="shrink-0">{act.icon}</span>
           <span className="truncate">{act.label}</span>
           {act.type === 'link' && <ExternalLink size={10} className="shrink-0 ml-auto" />}
         </button>
@@ -803,17 +802,17 @@ export default function ChatbotUnified({
       if (/semua menu|semua layanan|apa saja|daftar layanan|fitur apa|menu apa/i.test(text)) {
         addMsg('bot', '📋 Semua layanan **TENTREM** (*Tugurejo Nyaman Tanggap Responsif Modern*) Desa Tugurejo:', {
           actions: [
-            { label: '📢 Kanal Pengaduan',  payload: '__navigate:aduan',        type: 'text', icon: <Megaphone size={13} /> },
-            { label: '📅 Jadwal Ronda',     payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> },
-            { label: '📰 Berita Desa',      payload: '__navigate:berita',       type: 'text', icon: <Newspaper size={13} /> },
-            { label: '🗺️ Peta Wilayah',    payload: '__navigate:peta',         type: 'text', icon: <Map size={13} /> },
-            { label: '🌤️ Cuaca BMKG',      payload: '__navigate:cuaca',        type: 'text', icon: <CloudSun size={13} /> },
-            { label: '🥁 Kentongan',        payload: '__navigate:kentongan',    type: 'text', icon: <Drum size={13} /> },
-            { label: '📷 Galeri',           payload: '__navigate:galeri',       type: 'text', icon: <Camera size={13} /> },
-            { label: '🏛️ Struktur',        payload: '__navigate:struktur',     type: 'text', icon: <GitBranch size={13} /> },
-            { label: '📦 Inventaris',       payload: '__navigate:inventaris',   type: 'text', icon: <Package size={13} /> },
-            { label: '📋 Survei IKM',       payload: '__navigate:survei',       type: 'text', icon: <Star size={13} /> },
-            { label: '🎬 Profil Desa',      payload: '__navigate:profil',       type: 'text', icon: <Play size={13} /> },
+            { label: 'Kanal Pengaduan',  payload: '__navigate:aduan',        type: 'text', icon: <Megaphone size={13} /> },
+            { label: 'Jadwal Ronda',     payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> },
+            { label: 'Berita Desa',      payload: '__navigate:berita',       type: 'text', icon: <Newspaper size={13} /> },
+            { label: 'Peta Wilayah',    payload: '__navigate:peta',         type: 'text', icon: <Map size={13} /> },
+            { label: 'Cuaca BMKG',      payload: '__navigate:cuaca',        type: 'text', icon: <CloudSun size={13} /> },
+            { label: 'Kentongan',        payload: '__navigate:kentongan',    type: 'text', icon: <Drum size={13} /> },
+            { label: 'Galeri',           payload: '__navigate:galeri',       type: 'text', icon: <Camera size={13} /> },
+            { label: 'Struktur',        payload: '__navigate:struktur',     type: 'text', icon: <GitBranch size={13} /> },
+            { label: 'Inventaris',       payload: '__navigate:inventaris',   type: 'text', icon: <Package size={13} /> },
+            { label: 'Survei IKM',       payload: '__navigate:survei',       type: 'text', icon: <Star size={13} /> },
+            { label: 'Profil Desa',      payload: '__navigate:profil',       type: 'text', icon: <Play size={13} /> },
           ],
         });
         return;
