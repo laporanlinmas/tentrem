@@ -574,7 +574,7 @@ export default function BeritaPage({
         
         {/* Navigation Sticky Topbar */}
         <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
             
             <div className="flex items-center gap-3">
               <button
@@ -625,7 +625,7 @@ export default function BeritaPage({
         <main
           itemScope
           itemType="https://schema.org/NewsArticle"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8"
+          className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8"
         >
           {/* Hidden metadata for crawler indexing */}
           <meta itemProp="inLanguage" content="id-ID" />
@@ -636,9 +636,11 @@ export default function BeritaPage({
 
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 overflow-x-auto pb-1">
-            <button onClick={onBack} className="hover:text-emerald-600 cursor-pointer">Beranda</button>
+            <button onClick={onBack} className="hover:text-emerald-600 cursor-pointer flex items-center gap-1">
+              <Home className="w-3.5 h-3.5" /> Beranda
+            </button>
             <ChevronRight className="w-3.5 h-3.5 shrink-0" />
-            <button onClick={handleBackToList} className="hover:text-emerald-600 cursor-pointer">Berita &amp; Kegiatan</button>
+            <button onClick={handleBackToList} className="hover:text-emerald-600 cursor-pointer">Warta Desa</button>
             <ChevronRight className="w-3.5 h-3.5 shrink-0" />
             <span className="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[200px] sm:max-w-xs">{activeArticle.judul}</span>
           </nav>
