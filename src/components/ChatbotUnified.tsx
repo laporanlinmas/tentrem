@@ -2,15 +2,13 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  getTentremText,
   prefetchTentremText,
   askChatbot,
-  resetMemory,
 } from '@/lib/tentrem-knowledge';
 import {
   Send, X, Camera, Image as ImageIcon, User, Bot,
   MessageCircle, Clock, ExternalLink, AlertCircle,
-  CheckCircle2, Trash2, Phone, Globe, Map, Megaphone, Play,
+  CheckCircle2, Trash2, Globe, Map, Megaphone, Play,
   Newspaper, GitBranch, Drum, LayoutDashboard,
   CloudSun, Package, ClipboardList, ShieldCheck, Star,
 } from 'lucide-react';
@@ -77,24 +75,6 @@ const QUICK_ACTIONS: ChatAction[] = [
   { label: '🔍 Cek Status Tiket',       payload: 'cek status tiket',      type: 'text', icon: <Clock size={13} /> },
   { label: '📰 Warta & Berita Desa',    payload: '__navigate:berita',     type: 'text', icon: <Newspaper size={13} /> },
   { label: '💬 Hubungi Petugas Linmas', payload: 'hubungi petugas',       type: 'text', icon: <WhatsAppIcon size={13} /> },
-];
-
-// Quick actions for second row — halaman informasi
-const QUICK_ACTIONS_INFO: ChatAction[] = [
-  { label: '🗺️ Peta Wilayah',          payload: '__navigate:peta',        type: 'text', icon: <Map size={13} /> },
-  { label: '🌤️ Cuaca BMKG',            payload: '__navigate:cuaca',       type: 'text', icon: <CloudSun size={13} /> },
-  { label: '📅 Jadwal Ronda',           payload: '__navigate:jadwal-ronda',type: 'text', icon: <ClipboardList size={13} /> },
-  { label: '🥁 Isyarat Kentongan',      payload: '__navigate:kentongan',   type: 'text', icon: <Drum size={13} /> },
-  { label: '📷 Galeri Dokumentasi',     payload: '__navigate:galeri',      type: 'text', icon: <Camera size={13} /> },
-];
-
-// Quick actions untuk admin & info lanjutan
-const QUICK_ACTIONS_ADMIN: ChatAction[] = [
-  { label: '📋 Survei Kepuasan',        payload: '__navigate:survei',      type: 'text', icon: <Star size={13} /> },
-  { label: '🏛️ Struktur Satkamling',   payload: '__navigate:struktur',    type: 'text', icon: <GitBranch size={13} /> },
-  { label: '📦 Inventaris Poskamling',  payload: '__navigate:inventaris',  type: 'text', icon: <Package size={13} /> },
-  { label: '🎬 Profil Desa & Video',    payload: '__navigate:profil',      type: 'text', icon: <Play size={13} /> },
-  { label: '⚙️ Dashboard Admin',        payload: 'admin dashboard',        type: 'text', icon: <LayoutDashboard size={13} /> },
 ];
 
 const KATEGORI_LIST = [
@@ -401,14 +381,12 @@ export default function ChatbotUnified({
         ts: timeNow(),
       }]);
       prefetchTentremText();
-      resetMemory();
     }
 
     if (!isOpen && prevOpened.current) {
       draftRef.current = null;
       setActiveStep(null);
       clearPhotos();
-      resetMemory();
     }
     prevOpened.current = isOpen;
   }, [isOpen, clearPhotos]);
@@ -692,7 +670,7 @@ export default function ChatbotUnified({
       // ── Smart routing with Direct Actions ────────────────────────────────
 
       // 1. Ronda Malam & Poskamling
-      if (/ronda|siskamling|poskamling|patroli|danpok|jadwal ronda|kelompok ronda|lapor ronda|ronda malam/i.test(text)) {
+      if (/ronda|siskamling|poskamling|patroli|danpok|jadwal ronda|kelompok ronda|ronda malam/i.test(text)) {
         addMsg('bot', '🛡️ **Jadwal Ronda TENTREM** — Sistem ronda bergilir Desa Tugurejo:\n• Jadwal kelompok ronda bergilir setiap malam\n• Waktu jaga: 21:30 – 02:00 WIB\n• Tersinkron real-time dari Web Admin', {
           actions: [
             { label: 'Lihat Jadwal Ronda', payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> },
@@ -788,7 +766,7 @@ export default function ChatbotUnified({
       }
 
       // 12. Jadwal Ronda / Jadwal Ronda
-      if (/jadwal|smart poskamling|giliran|shift piket|jadwal piket/i.test(text) && !/lapor ronda/i.test(text)) {
+      if (/jadwal|smart poskamling|giliran|shift piket|jadwal piket/i.test(text)) {
         addMsg('bot', '📅 **Jadwal Ronda (Jadwal Ronda)** — jadwal ronda malam harian digital, kelompok bertugas, nama Danpok aktif, dan status kehadiran ronda terkini.', {
           actions: [{ label: 'Lihat Jadwal Ronda', payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> }],
         });

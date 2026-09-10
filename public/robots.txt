@@ -4,7 +4,6 @@ Allow: /berita
 Allow: /berita/
 Allow: /peta
 Allow: /pengaduan
-Allow: /lapor-ronda
 
 User-agent: Googlebot
 Allow: /

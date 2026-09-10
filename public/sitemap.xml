@@ -18,13 +18,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tentrem.ponorogo.go.id/pengaduan</loc>
+    <loc>https://tentrem.ponorogo.go.id/aduan</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://tentrem.ponorogo.go.id/lapor-ronda</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://tentrem.ponorogo.go.id/profil</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/struktur</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/galeri</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/kentongan</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/survei</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/cuaca</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/jadwal-ronda</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/rincian-tugas</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tentrem.ponorogo.go.id/inventaris</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>

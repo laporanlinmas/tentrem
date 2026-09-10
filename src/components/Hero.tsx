@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Megaphone, ShieldCheck, CloudSun, Cloud, CloudRain, Sun, CloudLightning, CloudFog, Wind, Droplets, ArrowRight, PhoneCall } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Megaphone, ShieldCheck, CloudSun, Cloud, CloudRain, Sun, CloudLightning, CloudFog, Wind, Droplets, ArrowRight } from 'lucide-react';
 import PanoramaViewer from './PanoramaViewer';
 
 /* ── Panorama ──────────────────────────────────────────────────────── */

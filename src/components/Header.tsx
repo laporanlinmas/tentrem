@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Home, Map, Megaphone, Star, Sun, Moon, X, Menu,
   Newspaper, Lock, GitBranch, Drum,

@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import {
-  UserCheck, Shield, Users, CheckCircle2,
-  ChevronRight, Home, GitBranch,
+  ChevronRight, Home,
   ChevronDown, ChevronUp,
 } from 'lucide-react';
 
@@ -92,7 +91,7 @@ const PELAKSANA_HARIAN: OrgMember[] = [
     institution: 'Administrasi & Pembukuan Pos Ronda',
     tugas: [
       'Mengelola administrasi poskamling, buku mutasi jaga, absensi, dan arsip kejadian',
-      'Mendokumentasikan laporan ronda harian ke dalam sistem TENTREM',
+      'Mendokumentasikan kegiatan ronda harian ke dalam sistem TENTREM',
       'Menyusun jadwal piket berkala dan surat pemberitahuan warga',
     ],
     level: 'pelaksana',
@@ -201,14 +200,6 @@ const TUPOKSI_5 = [
   },
 ];
 
-// ─── Colour config per level — satu warna saja (emerald brand) ──────────────
-const LEVEL_CONFIG = {
-  pembina:         { check: 'text-emerald-500', label: 'Tugas Utama' },
-  penanggungjawab: { check: 'text-emerald-500', label: 'Tanggung Jawab' },
-  pelaksana:       { check: 'text-emerald-500', label: 'Tugas Operasional' },
-  regu:            { check: 'text-emerald-500', label: 'Tugas Regu' },
-};
-
 // ─── Collapsible section ─────────────────────────────────────────────────────
 function CollapsibleSection({ id, title, subtitle, children }: {
   id: string; title: string; subtitle: string; children: React.ReactNode;
@@ -233,7 +224,7 @@ function CollapsibleSection({ id, title, subtitle, children }: {
 }
 
 // ─── Member card ─────────────────────────────────────────────────────────────
-function MemberCard({ m, cfg }: { m: OrgMember; cfg: typeof LEVEL_CONFIG['pembina'] }) {
+function MemberCard({ m }: { m: OrgMember }) {
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-l-[3px] border-l-emerald-500 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow space-y-3">
       <div>
@@ -286,21 +277,21 @@ export default function TupoksiDetailPage({ onBack, onNavigate }: Props) {
         {/* TINGKAT 1 */}
         <CollapsibleSection id="tingkat-1" title="Pembina & Pengarah Kebijakan" subtitle="Kepala Desa, Bhabinkamtibmas, Babinsa, dan Kasi Trantib">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {PEMBINA_MEMBERS.map((m, i) => <MemberCard key={i} m={m} cfg={LEVEL_CONFIG.pembina} />)}
+            {PEMBINA_MEMBERS.map((m, i) => <MemberCard key={i} m={m} />)}
           </div>
         </CollapsibleSection>
 
         {/* TINGKAT 2 */}
         <CollapsibleSection id="tingkat-2" title="Penanggung Jawab Siskamling" subtitle="Ketua Poskamling sebagai penanggung jawab utama operasional keamanan lingkungan">
           <div className="max-w-xl mx-auto">
-            {PENANGGUNG_JAWAB.map((m, i) => <MemberCard key={i} m={m} cfg={LEVEL_CONFIG.penanggungjawab} />)}
+            {PENANGGUNG_JAWAB.map((m, i) => <MemberCard key={i} m={m} />)}
           </div>
         </CollapsibleSection>
 
         {/* TINGKAT 3 */}
         <CollapsibleSection id="tingkat-3" title="Pengurus Pelaksana Poskamling" subtitle="Ketua, Sekretaris, Bendahara, dan Seksi Operasional Siskamling">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {PELAKSANA_HARIAN.map((m, i) => <MemberCard key={i} m={m} cfg={LEVEL_CONFIG.pelaksana} />)}
+            {PELAKSANA_HARIAN.map((m, i) => <MemberCard key={i} m={m} />)}
           </div>
         </CollapsibleSection>
 

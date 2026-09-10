@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Send, Upload, Trash2, Search, CheckCircle2, Clock, AlertCircle,
+  Send, Trash2, Search, CheckCircle2, Clock, AlertCircle,
   Copy, Check, ShieldCheck, Phone, MapPin, Calendar, ChevronDown,
   ChevronLeft, ChevronRight, Camera, Image as GalleryIcon, Navigation,
   Loader2, Home, Video, Play,
@@ -10,7 +10,6 @@ import {
 import { db } from '@/lib/firebase';
 import { doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { sendPushToRole } from '@/lib/fcm';
-import { WhatsAppIcon } from './BrandIcons';
 import KontakDaruratSection, { KontakPiket, KontakDaruratItem } from './KontakDaruratSection';
 export type { KontakPiket, KontakDaruratItem };
 

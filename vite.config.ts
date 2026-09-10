@@ -214,8 +214,8 @@ export default defineConfig({
           if (id.includes('@photo-sphere-viewer')) {
             return 'vendor-panorama';
           }
-          // ── UI libs: lucide, styled-components ──
-          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/styled-components')) {
+          // ── UI libs: lucide ──
+          if (id.includes('node_modules/lucide-react')) {
             return 'vendor-ui';
           }
           // ── Leaflet (hanya dipakai di PetaPage) ──
@@ -230,8 +230,7 @@ export default defineConfig({
           if (id.includes('src/components/PanoramaViewer')) return 'panorama';
           if (id.includes('src/components/GaleriPage')) return 'galeri';
           if (id.includes('src/components/BeritaPage')) return 'berita';
-          if (id.includes('src/components/LaporRondaPage') || id.includes('src/components/RondaAuthGate')) return 'ronda';
-          if (id.includes('src/components/KentonganPage') || id.includes('src/components/KentonganSection')) return 'kentongan';
+          if (id.includes('src/components/KentonganPage')) return 'kentongan';
           if (id.includes('src/components/PetaPage') || id.includes('src/components/MapSection')) return 'peta';
           if (id.includes('src/components/StrukturPage') || id.includes('src/components/StrukturSection')) return 'struktur';
           if (id.includes('src/components/ProfilPage')) return 'profil';

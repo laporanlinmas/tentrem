@@ -3,16 +3,12 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   CloudSun, Cloud, CloudRain, CloudLightning, Sun, Wind,
-  Droplets, Eye, Clock, MapPin, RefreshCw, AlertTriangle,
+  Droplets, Eye, Clock, AlertTriangle,
   Umbrella, CloudFog, ExternalLink, CheckCircle2, Home,
-  ChevronRight, Thermometer, Navigation, BarChart3, Info,
+  ChevronRight, Thermometer, Navigation, Info,
 } from 'lucide-react';
 
 /* ─────────────────────────── Types ─────────────────────────────── */
-interface LokasiBmkg {
-  provinsi: string; kotkab: string; kecamatan: string; desa: string;
-  lon: number; lat: number;
-}
 interface CuacaItem {
   datetime: string; local_datetime: string;
   t: number; hu: number; ws: number; wd: string; wd_deg: number;
@@ -75,16 +71,13 @@ interface WeatherPageProps { onBack: () => void; }
 /* ═══════════════════════════ COMPONENT ══════════════════════════════ */
 export default function WeatherPage({ onBack }: WeatherPageProps) {
   const [loading, setLoading]     = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [error, setError]         = useState<string | null>(null);
-  const [lokasi, setLokasi]       = useState<LokasiBmkg | null>(null);
   const [cuacaDays, setCuacaDays] = useState<CuacaItem[][]>([]);
   const [dayIdx, setDayIdx]       = useState(0);
-  const [lastUpdated, setLastUpdated] = useState('');
 
   /* fetch */
   const fetchData = useCallback(async (force = false) => {
-    if (force) setRefreshing(true); else setLoading(true);
+    if (!force) setLoading(true);
     setError(null);
     if (!force) {
       try {
@@ -92,8 +85,7 @@ export default function WeatherPage({ onBack }: WeatherPageProps) {
         if (raw) {
           const p = JSON.parse(raw);
           if (p?.ts && Date.now() - p.ts < CACHE_TTL_MS && p.data) {
-            setLokasi(p.data.lokasi); setCuacaDays(p.data.cuaca);
-            setLastUpdated(new Date(p.ts).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB');
+            setCuacaDays(p.data.cuaca);
             setLoading(false); return;
           }
         }
@@ -105,13 +97,11 @@ export default function WeatherPage({ onBack }: WeatherPageProps) {
       const json = await res.json();
       if (!json?.data?.[0]) throw new Error('Format data tidak sesuai');
       const entry = json.data[0];
-      setLokasi(entry.lokasi); setCuacaDays(entry.cuaca || []);
-      const ts = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
-      setLastUpdated(ts);
+      setCuacaDays(entry.cuaca || []);
       try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: { lokasi: entry.lokasi, cuaca: entry.cuaca || [] } })); } catch { /* ignore */ }
     } catch (err: any) {
       setError(err.message || 'Gagal terhubung ke BMKG.');
-    } finally { setLoading(false); setRefreshing(false); }
+    } finally { setLoading(false); }
   }, []);
 
   useEffect(() => { window.scrollTo(0, 0); fetchData(); }, [fetchData]);

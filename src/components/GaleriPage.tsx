@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom';
 import {
   Camera, Search, Home, X, ChevronLeft, ChevronRight,
-  ZoomIn, ZoomOut, RotateCcw, Calendar, MapPin, Tag,
-  ImageIcon, ShieldCheck,
+  ZoomIn, ZoomOut, RotateCcw, Calendar, MapPin,
+  ImageIcon,
 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, onSnapshot } from 'firebase/firestore';

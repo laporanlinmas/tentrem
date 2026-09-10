@@ -101,9 +101,25 @@ function PageSkeleton({ label }: { label: string }) {
 }
 
 // ─── Transition durations ───────────────────────────────────────────────────
-// Sinkron dengan CSS: page-fade-out = 180ms, page-fade-in = 260ms
-const FADE_OUT_MS = 180;
-const FADE_IN_DELAY_MS = 20; // gap minimal agar browser flush repaint sebelum enter
+// Keep the route swap short so navigation feels immediate without flashing.
+const FADE_OUT_MS = 140;
+const FADE_IN_DELAY_MS = 0;
+
+const PAGE_META: Record<PageRoute, { title: string; description: string }> = {
+  home: { title: 'TENTREM | Tugurejo Nyaman Tanggap Responsif Modern', description: 'Portal layanan publik Desa Tugurejo, Ponorogo: informasi desa, keamanan lingkungan, jadwal ronda, cuaca BMKG, peta wilayah, dan pengaduan warga.' },
+  profil: { title: 'Profil Desa Tugurejo | TENTREM', description: 'Profil, sejarah, wilayah, dan video Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.' },
+  berita: { title: 'Berita Desa Tugurejo | TENTREM', description: 'Berita, pengumuman, agenda, dan kegiatan terbaru Desa Tugurejo, Ponorogo.' },
+  aduan: { title: 'Pengaduan Warga Desa Tugurejo | TENTREM', description: 'Sampaikan dan lacak pengaduan warga Desa Tugurejo secara mudah melalui portal TENTREM.' },
+  struktur: { title: 'Struktur Satkamling Desa Tugurejo | TENTREM', description: 'Struktur organisasi dan susunan tugas Satkamling Desa Tugurejo.' },
+  galeri: { title: 'Galeri Kegiatan Desa Tugurejo | TENTREM', description: 'Dokumentasi kegiatan warga, ronda, gotong royong, dan Satlinmas Desa Tugurejo.' },
+  kentongan: { title: 'Isyarat Kentongan Desa Tugurejo | TENTREM', description: 'Pelajari kode isyarat kentongan dan gunakan simulator bunyi interaktif TENTREM.' },
+  peta: { title: 'Peta Wilayah Desa Tugurejo | TENTREM', description: 'Peta digital wilayah, poskamling, fasilitas umum, dan zona kerawanan Desa Tugurejo.' },
+  survei: { title: 'Survei Kepuasan Masyarakat | TENTREM', description: 'Isi survei kepuasan layanan publik Desa Tugurejo untuk membantu peningkatan pelayanan.' },
+  cuaca: { title: 'Prakiraan Cuaca Tugurejo | TENTREM', description: 'Prakiraan cuaca BMKG terkini untuk Desa Tugurejo, Kecamatan Slahung, Ponorogo.' },
+  'jadwal-ronda': { title: 'Jadwal Ronda Desa Tugurejo | TENTREM', description: 'Jadwal ronda malam, kelompok bertugas, Danpok, dan anggota aktif Poskamling Desa Tugurejo.' },
+  'rincian-tugas': { title: 'Rincian Tugas Satlinmas | TENTREM', description: 'Rincian tugas dan fungsi setiap jabatan dalam struktur Satlinmas Desa Tugurejo.' },
+  inventaris: { title: 'Inventaris Poskamling | TENTREM', description: 'Daftar aset dan perlengkapan Poskamling Satlinmas Desa Tugurejo.' },
+};
 
 // ─── URL parsing & routing helpers ──────────────────────────────────────────
 function parseLocation(): { page: PageRoute; slug: string } {
@@ -133,7 +149,7 @@ function parseLocation(): { page: PageRoute; slug: string } {
   if (p === '/peta' || p === '/peta-wilayah')       return { page: 'peta', slug: '' };
   if (p === '/survei' || p === '/kritik-saran' || p === '/survey') return { page: 'survei', slug: '' };
   if (p === '/cuaca' || p === '/prakiraan-cuaca') return { page: 'cuaca', slug: '' };
-  if (p === '/jadwal-ronda' || p === '/jadwal-ronda') return { page: 'jadwal-ronda', slug: '' };
+  if (p === '/jadwal-ronda') return { page: 'jadwal-ronda', slug: '' };
   if (p === '/rincian-tugas' || p === '/tupoksi') return { page: 'rincian-tugas', slug: '' };
   if (p === '/inventaris') return { page: 'inventaris', slug: '' };
 
@@ -172,27 +188,19 @@ function buildPageUrl(page: PageRoute, slug?: string): string {
   }
 }
 
-function setContentTransition(className: 'page-enter' | 'page-exit', enabled: boolean) {
-  document.getElementById('page-content')?.classList.toggle(className, enabled);
-}
-
 export default function HomePage() {
   const [chatbotOpen, setChatbotOpen] = useState(false);
-  const [aduanTab, setAduanTab] = useState<'form' | 'track'>('form');
   const [selectedBeritaSlug, setSelectedBeritaSlug] = useState('');
   const navigationTimerRef = useRef<number | null>(null);
   const pageEnterTimerRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
-  // Track jika sedang dalam proses navigasi untuk mencegah double-trigger
-  const isNavigatingRef = useRef(false);
-
   // Current page state initialized from browser location
   const [page, setPage] = useState<PageRoute>(() => parseLocation().page);
 
   // Fade-in on mount — double rAF supaya browser sudah paint sebelum class enter ditambah
   useEffect(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = requestAnimationFrame(() => {
         document.getElementById('page-content')?.classList.add('page-enter');
       });
     });
@@ -223,8 +231,8 @@ export default function HomePage() {
 
         el?.classList.remove('page-exit');
         pageEnterTimerRef.current = window.setTimeout(() => {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => el?.classList.add('page-enter'));
+          rafRef.current = requestAnimationFrame(() => {
+            rafRef.current = requestAnimationFrame(() => el?.classList.add('page-enter'));
           });
         }, FADE_IN_DELAY_MS);
       }, FADE_OUT_MS);
@@ -250,8 +258,6 @@ export default function HomePage() {
     if (navigationTimerRef.current !== null) window.clearTimeout(navigationTimerRef.current);
     if (pageEnterTimerRef.current !== null) window.clearTimeout(pageEnterTimerRef.current);
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    isNavigatingRef.current = true;
-
     // 1. Mulai animasi exit
     const el = document.getElementById('page-content');
     el?.classList.remove('page-enter');
@@ -274,19 +280,43 @@ export default function HomePage() {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             el?.classList.add('page-enter');
-            isNavigatingRef.current = false;
           });
         });
       }, FADE_IN_DELAY_MS);
     }, FADE_OUT_MS);
   }, [page, selectedBeritaSlug]);
 
-  // Sinkronisasi judul tab browser agar selalu stabil mengikuti index.html
+  // Keep browser and social metadata aligned with the client-side route.
   useEffect(() => {
-    if (page === 'home') {
-      document.title = 'Tentrem - Tugurejo Nyaman Tanggap Responsif Modern';
+    const meta = PAGE_META[page];
+    const canonicalUrl = new URL(buildPageUrl(page, page === 'berita' ? selectedBeritaSlug : undefined), window.location.origin).href;
+    document.title = meta.title;
+
+    const setMeta = (selector: string, attribute: 'name' | 'property', value: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, selector.split('"')[1]);
+        document.head.appendChild(element);
+      }
+      element.content = value;
+    };
+
+    setMeta('meta[name="description"]', 'name', meta.description);
+    setMeta('meta[property="og:title"]', 'property', meta.title);
+    setMeta('meta[property="og:description"]', 'property', meta.description);
+    setMeta('meta[property="og:url"]', 'property', canonicalUrl);
+    setMeta('meta[name="twitter:title"]', 'name', meta.title);
+    setMeta('meta[name="twitter:description"]', 'name', meta.description);
+
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
     }
-  }, [page]);
+    canonical.href = canonicalUrl;
+  }, [page, selectedBeritaSlug]);
 
   // Scroll reveal observer on home page — re-init setiap kali kembali ke home
   useEffect(() => {
@@ -318,12 +348,15 @@ export default function HomePage() {
     };
 
     // Sedikit delay agar DOM page-enter sudah selesai sebelum observer jalan
+    let obs: IntersectionObserver | null = null;
     const timer = window.setTimeout(() => {
-      const obs = resetAndObserve();
-      return () => obs.disconnect();
-    }, 260); // sedikit lebih lama dari fade-in duration (240ms)
+      obs = resetAndObserve();
+    }, 220);
 
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      obs?.disconnect();
+    };
   }, [page]);
 
   // ═══════════════════════════════════════════════════════
@@ -361,7 +394,6 @@ export default function HomePage() {
           <Suspense fallback={<PageSkeleton label="Memuat Halaman Pengaduan…" />}>
             <AduanPage
               onBack={() => navigateTo('home')}
-              initialTab={aduanTab}
             />
           </Suspense>
         );

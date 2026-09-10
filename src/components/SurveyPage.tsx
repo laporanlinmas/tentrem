@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { MessageSquare, Star, Home, ChevronRight, ShieldCheck } from 'lucide-react';
+import { useEffect } from 'react';
+import { Home, ChevronRight } from 'lucide-react';
 import Header from './Header';
 import SurveySection from './SurveySection';
 

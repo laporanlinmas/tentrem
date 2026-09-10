@@ -437,8 +437,6 @@ function scoreChunk(chunk: string, tokens: string[]): number {
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN ASK CHATBOT PIPELINE
 // ════════════════════════════════════════════════════════════════════════════
-let lastAnswer = '';
-
 export async function askChatbot(userQuery: string): Promise<string> {
   const rawQuery = userQuery.trim();
   if (!rawQuery) return 'Halo! Ada yang bisa saya bantu terkait sistem TENTREM Desa Tugurejo?';
@@ -613,7 +611,7 @@ export async function askChatbot(userQuery: string): Promise<string> {
   const bestChunks = scoredChunks.filter(c => c.score > 0).slice(0, 3);
 
   if (bestChunks.length === 0 || bestChunks[0].score < 6) {
-    return 'Maaf, informasi tersebut belum tersedia. Coba tanyakan tentang:\n• **Ahmad Basith** (Inovator) atau **Erry Setiyoso Birowo** (Pembina)\n• **Pengaduan warga**, **Laporan Ronda**, **Berita Desa**\n• **Peta Wilayah**, **Cuaca BMKG**, **Kentongan**\n• **Satlinmas**, **Poskamling**, atau **Dashboard Admin**';
+    return 'Maaf, informasi tersebut belum tersedia. Coba tanyakan tentang:\n• **Ahmad Basith** (Inovator) atau **Erry Setiyoso Birowo** (Pembina)\n• **Pengaduan warga**, **Jadwal Ronda**, **Berita Desa**\n• **Peta Wilayah**, **Cuaca BMKG**, **Kentongan**\n• **Satlinmas**, **Poskamling**, atau **Dashboard Admin**';
   }
 
   // Gabungkan teks, pisah per kalimat, score tiap kalimat terhadap query
@@ -655,11 +653,5 @@ export async function askChatbot(userQuery: string): Promise<string> {
     .slice(0, maxSentences);
 
   const responseText = unique.map(s => s.text).join(' ').trim();
-  lastAnswer = responseText;
-
   return responseText || 'TENTREM adalah portal layanan terpadu Desa Tugurejo yang dikembangkan oleh **Ahmad Basith** (ASN Satpol PP Ponorogo), dibina oleh **Erry Setiyoso Birowo, SP**.';
-}
-
-export function resetMemory(): void {
-  lastAnswer = '';
 }

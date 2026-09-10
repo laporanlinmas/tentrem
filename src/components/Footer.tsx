@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { MapPin, Clock, ExternalLink, Heart, ShieldCheck, X } from 'lucide-react';
-import { FacebookIcon, XIcon, InstagramIcon, WhatsAppIcon, TikTokIcon } from './BrandIcons';
+import { useState } from 'react';
+import { MapPin, Clock, ExternalLink, Heart, X } from 'lucide-react';
+import { FacebookIcon, InstagramIcon, WhatsAppIcon, TikTokIcon } from './BrandIcons';
 
 const SOCIAL_LINKS = [
   { label: 'Facebook',   href: 'https://www.facebook.com/pemdes.tugurejo/', icon: <FacebookIcon />,  hoverBg: '#1877F2', hoverColor: '#fff' },

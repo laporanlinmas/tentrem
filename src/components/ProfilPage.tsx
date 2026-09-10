@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Video,
   Home,
@@ -14,7 +14,7 @@ interface ProfilPageProps {
   onNavigate?: (page: string, slug?: string) => void;
 }
 
-export default function ProfilPage({ onBack, onNavigate }: ProfilPageProps) {
+export default function ProfilPage({ onBack }: ProfilPageProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (

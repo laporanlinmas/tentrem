@@ -4,8 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import {
   Newspaper, Calendar, User, Tag, Clock, ArrowLeft, Eye,
   Search, Sparkles, ChevronRight, X, Share2, Check,
-  ExternalLink, Layers, BookOpen, MessageCircle, Star,
-  ArrowRight, Home, Flame, Bookmark
+  MessageCircle, Star, ArrowRight, Home, Flame
 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import {
@@ -236,7 +235,7 @@ export default function BeritaPage({
   onSelectArticle,
 }: BeritaPageProps) {
   const [beritaList, setBeritaList] = useState<BeritaItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [selectedKategori, setSelectedKategori] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeArticle, setActiveArticle] = useState<BeritaItem | null>(null);

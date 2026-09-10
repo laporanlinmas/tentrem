@@ -1,12 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import {
-  GitBranch,
-  BookOpen,
-  ChevronRight,
-  Home,
-} from 'lucide-react';
+import { BookOpen, ChevronRight, Home } from 'lucide-react';
 import StrukturSection from '@/components/StrukturSection';
 
 interface StrukturPageProps {

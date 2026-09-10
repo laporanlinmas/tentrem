@@ -291,7 +291,7 @@ const PetaKerawananViewer: React.FC<PetaKerawananViewerProps> = ({ onClose }) =>
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
-export default function PetaPage({ onBack, onNavigate }: PetaPageProps) {
+export default function PetaPage({ onBack }: PetaPageProps) {
   const [showPetaKerawanan, setShowPetaKerawanan] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);

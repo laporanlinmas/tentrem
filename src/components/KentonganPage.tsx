@@ -300,7 +300,7 @@ interface KentonganPageProps {
   onNavigate?: (page: string, slug?: string) => void;
 }
 
-export default function KentonganPage({ onBack, onNavigate }: KentonganPageProps) {
+export default function KentonganPage({ onBack }: KentonganPageProps) {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
 

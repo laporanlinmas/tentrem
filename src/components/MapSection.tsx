@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import {
-  MapPin,
   Maximize2,
   Minimize2,
   RefreshCw,
@@ -10,11 +9,7 @@ import {
   Navigation,
   Plus,
   Minus,
-  Layers,
   Shield,
-  Home,
-  CheckCircle2,
-  ExternalLink
 } from 'lucide-react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';

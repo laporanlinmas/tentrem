@@ -1,22 +1,20 @@
 'use client';
 
-import React from 'react';
 import {
-  Shield, User, Users, Clock,
+  User, Users, Clock,
   AlertTriangle, CheckCircle2, Home, ChevronRight,
-  MapPin, Calendar, Star,
+  Calendar, Star,
 } from 'lucide-react';
-import { useJadwalRonda, KelompokRonda, getTodayGroupBySiklus, getTodayCycleDay } from './JadwalRondaSection';
+import { useJadwalRonda } from './JadwalRondaSection';
 
 /* ─────────────── Constants ────────────────────────── */
 const JAM_MULAI   = '21:30';
 const JAM_SELESAI = '02:00';
-const HARI_ORDER  = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 
 interface JadwalRondaPageProps { onBack: () => void; }
 
 export default function JadwalRondaPage({ onBack }: JadwalRondaPageProps) {
-  const { kelompokList, todayGroup, today, cycleDay, activeCount, tanggalMulaiSiklus, loading } = useJadwalRonda();
+  const { kelompokList, todayGroup, today, cycleDay, activeCount, loading } = useJadwalRonda();
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
@@ -32,9 +30,16 @@ export default function JadwalRondaPage({ onBack }: JadwalRondaPageProps) {
         </nav>
 
         {/* Header */}
-        <div className="rounded-2xl bg-slate-900 dark:bg-slate-950 border border-slate-700/60 px-6 py-5 text-white">
-          <h1 className="text-xl sm:text-2xl font-black text-white leading-tight">Jadwal Ronda TENTREM</h1>
-          <p className="text-sm text-slate-400 mt-1.5">Sistem ronda cerdas berbasis digital — jadwal bergilir, laporan petugas, dan pemantauan keamanan lingkungan.</p>
+        <div className="relative overflow-hidden rounded-3xl bg-slate-950 border border-slate-800 px-6 py-7 sm:px-8 sm:py-8 text-white shadow-xl shadow-slate-900/10">
+          <div className="absolute -right-16 -top-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
+          <div className="relative max-w-2xl">
+            <div className="mb-3 flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.2em] text-emerald-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.12)]" />
+              Poskamling Digital
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-white leading-tight">Jadwal Ronda TENTREM</h1>
+            <p className="text-sm leading-relaxed text-slate-400 mt-2">Jadwal bergilir dan susunan petugas ronda Desa Tugurejo dalam satu tampilan yang mudah dipantau.</p>
+          </div>
         </div>
 
         {loading ? (
@@ -45,113 +50,105 @@ export default function JadwalRondaPage({ onBack }: JadwalRondaPageProps) {
           <>
             {/* ── Kelompok Bertugas Hari Ini ── */}
             {todayGroup && (
-              <div className="bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl overflow-hidden shadow-sm">
-                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-emerald-100 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/30">
-                  <Star className="w-4 h-4 text-emerald-500 fill-emerald-500" />
-                  <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-700 dark:text-emerald-300">Bertugas Malam Ini — {today}</span>
-                  <span className="ml-auto flex h-2 w-2 relative">
-                    <span className="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative rounded-full h-2 w-2 bg-emerald-500" />
+              <section className="overflow-hidden rounded-3xl border border-emerald-200 bg-white shadow-sm dark:border-emerald-800/50 dark:bg-slate-900">
+                <div className="flex flex-wrap items-center gap-3 border-b border-emerald-100 bg-emerald-50/80 px-5 py-4 dark:border-emerald-900/50 dark:bg-emerald-950/30 sm:px-7">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-sm shadow-emerald-500/25">
+                    <Star className="h-4 w-4 fill-current" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-300">Bertugas malam ini</p>
+                    <p className="mt-0.5 text-sm font-bold text-slate-700 dark:text-slate-200">{today} · Petugas aktif</p>
+                  </div>
+                  <span className="ml-auto flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 py-1 text-[11px] font-bold text-emerald-700 dark:border-emerald-800 dark:bg-slate-900 dark:text-emerald-300">
+                    <span className="relative flex h-2 w-2"><span className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" /><span className="relative h-2 w-2 rounded-full bg-emerald-500" /></span>
+                    Aktif
                   </span>
                 </div>
-                <div className="p-5 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-5">
-                    <div className="flex-1">
-                      <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-2">{todayGroup.nama}</p>
-                      {todayGroup.danpok && (
-                        <div className="flex items-center gap-2 mb-4">
-                          <User className="w-4 h-4 text-emerald-500" />
-                          <span className="text-sm text-slate-600 dark:text-slate-400">Komandan: <strong className="text-slate-800 dark:text-slate-200">{todayGroup.danpok}</strong></span>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
-                          <Clock className="w-3.5 h-3.5" /> {JAM_MULAI} – {JAM_SELESAI} WIB
-                        </div>
-                        <span className="text-xs text-slate-400">4,5 Jam</span>
-                      </div>
-                    </div>
-                    {todayGroup.anggota && todayGroup.anggota.length > 0 && (
-                      <div className="sm:w-80">
-                        <p className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-                          <Users className="w-3.5 h-3.5" /> {todayGroup.anggota.length} Anggota Bertugas
-                        </p>
-                        <div className="grid grid-cols-2 gap-2">
-                          {todayGroup.anggota.map((nama, i) => (
-                            <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                              <span className="w-5 h-5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black flex items-center justify-center shrink-0">{i+1}</span>
-                              <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">{nama}</span>
-                            </div>
-                          ))}
+                <div className="grid lg:grid-cols-[minmax(15rem,0.72fr)_minmax(0,1.28fr)]">
+                  <div className="border-b border-slate-100 p-5 dark:border-slate-800 sm:p-7 lg:border-b-0 lg:border-r">
+                    <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Kelompok jaga</p>
+                    <p className="mt-2 text-2xl font-black leading-tight text-slate-950 dark:text-white sm:text-3xl">{todayGroup.nama}</p>
+                    {todayGroup.danpok && (
+                      <div className="mt-5 flex items-center gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"><User className="h-4 w-4" /></div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Danpok</p>
+                          <p className="break-words text-sm font-bold text-slate-800 dark:text-slate-200">{todayGroup.danpok}</p>
                         </div>
                       </div>
                     )}
+                    <div className="mt-6 flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50 px-3.5 py-3 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+                      <Clock className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700/70 dark:text-emerald-300/70">Jam jaga</p>
+                        <p className="text-sm font-black text-emerald-800 dark:text-emerald-200">{JAM_MULAI} – {JAM_SELESAI} WIB</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-slate-50/70 p-5 dark:bg-slate-950/30 sm:p-7">
+                    <div className="mb-4 flex items-end justify-between gap-3">
+                      <div>
+                        <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Regu bertugas</p>
+                        <p className="mt-1 text-lg font-black text-slate-900 dark:text-white">{todayGroup.anggota?.length || 0} anggota aktif</p>
+                      </div>
+                      <Users className="h-5 w-5 text-emerald-500" />
+                    </div>
+                    {todayGroup.anggota && todayGroup.anggota.length > 0 ? (
+                      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+                        {todayGroup.anggota.map((nama, i) => (
+                          <div key={i} className="flex min-h-[4.25rem] items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3.5 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-xs font-black text-emerald-600 dark:text-emerald-400">{String(i + 1).padStart(2, '0')}</span>
+                            <span className="break-words text-sm font-bold leading-snug text-slate-700 dark:text-slate-200">{nama}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : <p className="rounded-2xl border border-dashed border-slate-300 px-4 py-5 text-sm italic text-slate-400 dark:border-slate-700">Anggota belum diatur.</p>}
                   </div>
                 </div>
-              </div>
+              </section>
             )}
 
             {/* ── Jadwal Siklus 14 Hari ── */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
-                <div className="w-1.5 h-5 rounded-full bg-gradient-to-b from-teal-400 to-emerald-500" />
-                <span className="text-xs font-extrabold uppercase tracking-widest text-slate-600 dark:text-slate-300">Jadwal Siklus — {activeCount || 7} Kelompok Bergilir (Senin – Minggu)</span>
-                <Calendar className="w-4 h-4 text-slate-400 ml-auto" />
+            <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 px-5 py-5 dark:border-slate-800 sm:px-7">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white dark:bg-emerald-500"><Calendar className="h-4 w-4" /></div>
+                  <div>
+                    <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Rotasi penjagaan</p>
+                    <h2 className="mt-1 text-lg font-black text-slate-900 dark:text-white">Siklus {activeCount || kelompokList.length} kelompok</h2>
+                  </div>
+                </div>
+                <div className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-300">{JAM_MULAI} – {JAM_SELESAI} WIB</div>
               </div>
-              <div className="divide-y divide-slate-100 dark:divide-slate-800">
+              <div className="grid grid-cols-1 gap-3 bg-slate-50/70 p-4 dark:bg-slate-950/20 sm:grid-cols-2 sm:p-5 xl:grid-cols-3">
                 {Array.from({ length: activeCount || kelompokList.length }, (_, i) => i + 1).map(urutNo => {
                   const k = kelompokList.find(x => (x.urutan ?? 99) === urutNo && x.aktif !== false);
                   const isToday = cycleDay === urutNo;
                   return (
-                    <div key={urutNo} className={`flex items-start gap-4 px-5 py-4 transition-colors ${isToday ? 'bg-emerald-50 dark:bg-emerald-950/30' : 'hover:bg-slate-50 dark:hover:bg-slate-800/30'}`}>
-                      {/* Urutan pill */}
-                      <div className={`shrink-0 w-24 text-center py-2 rounded-xl text-xs font-black ${isToday ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}>
-                        <div>{k?.hari ? k.hari.toUpperCase() : `Hari ${urutNo}`}</div>
-                        {isToday && <div className="text-[9px] font-bold opacity-90 mt-0.5">HARI INI</div>}
-                      </div>
-
-                      {k ? (
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap mb-2">
-                            <p className={`text-base font-black ${isToday ? 'text-emerald-700 dark:text-emerald-300' : 'text-slate-800 dark:text-white'}`}>{k.nama}</p>
-                            {isToday && <CheckCircle2 className="w-4 h-4 text-emerald-500" />}
-                          </div>
-                          {k.danpok && (
-                            <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-2">
-                              <User className="w-3 h-3 text-emerald-500" /> Danpok: <strong className="text-slate-700 dark:text-slate-300 ml-0.5">{k.danpok}</strong>
-                            </p>
-                          )}
-                          {k.anggota && k.anggota.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5">
-                              {k.anggota.map((nama, i) => (
-                                <span key={i} className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 flex items-center gap-1">
-                                  <User className="w-2.5 h-2.5 text-emerald-500 shrink-0" />{nama}
-                                </span>
-                              ))}
-                            </div>
-                          )}
+                    <article key={urutNo} className={`flex min-h-[13rem] flex-col rounded-2xl border p-4 transition-all ${isToday ? 'border-emerald-300 bg-emerald-50/80 shadow-md shadow-emerald-500/10 dark:border-emerald-700 dark:bg-emerald-950/25' : 'border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700'}`}>
+                      <div className="flex items-start justify-between gap-3">
+                        <div className={`rounded-xl px-2.5 py-1.5 text-[10px] font-black uppercase tracking-wider ${isToday ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
+                          {k?.hari || `Hari ${urutNo}`}
                         </div>
-                      ) : (
-                        <div className="flex-1 flex items-center gap-2 text-slate-400">
-                          <AlertTriangle className="w-4 h-4 shrink-0" />
-                          <span className="text-sm italic">Kelompok belum diatur</span>
-                        </div>
-                      )}
-
-                      <div className="shrink-0 text-right">
-                        <div className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">{JAM_MULAI}</div>
-                        <div className="text-[10px] text-slate-400">s/d {JAM_SELESAI}</div>
-                        {k?.anggota?.length && <div className="text-[10px] text-slate-400 mt-0.5">{k.anggota.length} org</div>}
+                        {isToday ? <span className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400"><CheckCircle2 className="h-3.5 w-3.5" /> Hari ini</span> : <span className="text-xs font-bold text-slate-400">#{String(urutNo).padStart(2, '0')}</span>}
                       </div>
-                    </div>
+                      {k ? <>
+                        <p className={`mt-5 break-words text-lg font-black leading-tight ${isToday ? 'text-emerald-800 dark:text-emerald-200' : 'text-slate-900 dark:text-white'}`}>{k.nama}</p>
+                        {k.danpok && <p className="mt-2 flex items-start gap-1.5 text-xs text-slate-500 dark:text-slate-400"><User className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" /> <span className="break-words">Danpok: <strong className="text-slate-700 dark:text-slate-300">{k.danpok}</strong></span></p>}
+                        <div className="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
+                          <span className="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400"><Users className="h-3.5 w-3.5 text-emerald-500" /> {k.anggota?.length || 0} anggota</span>
+                          <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-slate-400"><Clock className="h-3 w-3" /> {JAM_MULAI}</span>
+                        </div>
+                      </> : <div className="flex flex-1 flex-col items-center justify-center gap-2 text-center text-slate-400"><AlertTriangle className="h-6 w-6" /><span className="text-sm italic">Kelompok belum diatur</span></div>}
+                      </article>
                   );
                 })}
               </div>
-              <div className="px-5 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex items-center gap-2 text-[11px] text-slate-400">
+              <div className="flex items-center gap-2 border-t border-slate-100 bg-white px-5 py-3 text-[11px] text-slate-400 dark:border-slate-800 dark:bg-slate-900">
                 <Clock className="w-3.5 h-3.5 text-teal-500" />
                 <span>Setiap malam · {JAM_MULAI} – {JAM_SELESAI} WIB · 4,5 Jam · Siklus bergilir {activeCount || kelompokList.length} kelompok</span>
               </div>
-            </div>
+            </section>
           </>
         )}
 

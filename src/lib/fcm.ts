@@ -4,7 +4,7 @@
  */
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, getDocs, collection } from 'firebase/firestore';
+import { getFirestore, getDocs, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey:            (import.meta as any).env?.VITE_FIREBASE_API_KEY || 'AIzaSyC4dtS_MPlvlNjiCxNJ37R0X95uIznqsnc',
