@@ -41,6 +41,13 @@ export const KATEGORI_LIST = [
   'Kesehatan & Lingkungan'
 ];
 
+const getPublicOrigin = () => {
+  if (typeof window !== 'undefined' && /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(window.location.host)) {
+    return window.location.origin;
+  }
+  return 'https://tentrem.ponorogo.go.id';
+};
+
 export const getKategoriBadgeTheme = (kategori: string) => {
   switch (kategori) {
     case 'Ketertiban & Keamanan':
@@ -308,11 +315,12 @@ export default function BeritaPage({
       activeArticle?.ringkasan ||
       'Berita, pengumuman, agenda, dan kegiatan keamanan lingkungan Poskamling RT 01 RW 01 Tugurejo.';
     const slug = activeArticle?.slug || activeArticle?.id;
+    const publicOrigin = getPublicOrigin();
     const canonicalUrl = slug
-      ? `${window.location.origin}/berita/${encodeURIComponent(slug)}`
-      : `${window.location.origin}/berita`;
+      ? `${publicOrigin}/berita/${encodeURIComponent(slug)}`
+      : `${publicOrigin}/berita`;
     const imageUrl =
-      activeArticle?.gambarUtama || `${window.location.origin}/assets/tugurejo.webp`;
+      activeArticle?.gambarUtama || `${publicOrigin}/assets/tugurejo.webp`;
 
     // ISO dates for schema & meta
     let pubIso = new Date().toISOString();
@@ -429,15 +437,15 @@ export default function BeritaPage({
         author: {
           '@type': 'Person',
           name: activeArticle.penulis || 'Pemerintah Desa Tugurejo',
-          url: window.location.origin,
+          url: publicOrigin,
         },
         publisher: {
           '@type': 'GovernmentOrganization',
           name: 'Pemerintah Desa Tugurejo',
-          url: window.location.origin,
+          url: publicOrigin,
           logo: {
             '@type': 'ImageObject',
-            url: `${window.location.origin}/assets/icon-512.png`,
+            url: `${publicOrigin}/assets/icon-512.png`,
           },
         },
         articleSection: activeArticle.kategori,
@@ -503,7 +511,8 @@ export default function BeritaPage({
 
   const getArticleUrl = (item: BeritaItem) => {
     const slug = item.slug || item.id;
-    return slug ? `${window.location.origin}/berita/${encodeURIComponent(slug)}` : `${window.location.origin}/berita`;
+    const publicOrigin = getPublicOrigin();
+    return slug ? `${publicOrigin}/berita/${encodeURIComponent(slug)}` : `${publicOrigin}/berita`;
   };
 
   const handleShareWhatsApp = (item: BeritaItem) => {

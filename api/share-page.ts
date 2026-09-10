@@ -16,6 +16,8 @@ const HOME_META = {
   description: 'Sistem informasi Poskamling RT 01 RW 01 Desa Tugurejo untuk mendukung keamanan lingkungan, jadwal ronda, informasi kegiatan, pengaduan warga, dan koordinasi keamanan.',
 };
 
+const PUBLIC_ORIGIN = process.env.PUBLIC_SITE_URL || 'https://tentrem.ponorogo.go.id';
+
 const PAGE_META: Record<string, { title: string; description: string }> = {
   '/': HOME_META,
   '/profil': {
@@ -144,7 +146,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const host = req.headers.host || '';
   const forwardedProto = firstQueryValue(req.headers['x-forwarded-proto']);
   const protocol = forwardedProto || (/^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(host) ? 'http' : 'https');
-  const origin = `${protocol}://${host}`;
+  const requestOrigin = `${protocol}://${host}`;
+  const isLocalRequest = /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(host);
+  const publicOrigin = isLocalRequest ? requestOrigin : PUBLIC_ORIGIN;
   const article = path === '/berita' ? await findPublishedArticle(slug) : null;
   const routeMeta = PAGE_META[path] || HOME_META;
   const title = article?.judul ? `${article.judul} | TENTREM` : routeMeta.title;
@@ -152,18 +156,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const canonicalPath = article
     ? `/berita/${encodeURIComponent(article.slug || article.id)}`
     : path;
-  const canonicalUrl = `${origin}${canonicalPath}`;
+  const canonicalUrl = `${publicOrigin}${canonicalPath}`;
   const imageUrl = article?.gambarUtama
-    ? new URL(article.gambarUtama, origin).href
-    : `${origin}/assets/tugurejo.webp`;
+    ? new URL(article.gambarUtama, publicOrigin).href
+    : `${publicOrigin}/assets/tugurejo.webp`;
 
   try {
-    const indexUrl = `${origin}/index.html`;
+    const indexUrl = `${requestOrigin}/index.html`;
     const indexResponse = await fetch(indexUrl);
     if (!indexResponse.ok) throw new Error(`Could not load index.html (${indexResponse.status})`);
 
     let html = await indexResponse.text();
-    html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+    html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(routeMeta.title)}</title>`);
     html = replaceMeta(html, 'name', 'description', description);
     html = replaceMeta(html, 'property', 'og:title', title);
     html = replaceMeta(html, 'property', 'og:description', description);

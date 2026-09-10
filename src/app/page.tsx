@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import JadwalRondaSection from '@/components/JadwalRondaSection';
@@ -149,6 +149,8 @@ const PAGE_META: Record<PageRoute, { title: string; description: string }> = {
     description: 'Daftar aset, sarana, prasarana, dan perlengkapan yang tersedia di Poskamling RT 01 RW 01 Tugurejo.'
   },
 };
+
+const PUBLIC_SITE_ORIGIN = 'https://tentrem.ponorogo.go.id';
 
 // ─── URL parsing & routing helpers ──────────────────────────────────────────
 function parseLocation(): { page: PageRoute; slug: string } {
@@ -316,9 +318,12 @@ export default function HomePage() {
   }, [page, selectedBeritaSlug]);
 
   // Keep browser and social metadata aligned with the client-side route.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const meta = PAGE_META[page];
-    const canonicalUrl = new URL(buildPageUrl(page, page === 'berita' ? selectedBeritaSlug : undefined), window.location.origin).href;
+    const origin = /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(window.location.host)
+      ? window.location.origin
+      : PUBLIC_SITE_ORIGIN;
+    const canonicalUrl = new URL(buildPageUrl(page, page === 'berita' ? selectedBeritaSlug : undefined), origin).href;
     document.title = meta.title;
 
     const setMeta = (selector: string, attribute: 'name' | 'property', value: string) => {
