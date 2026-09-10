@@ -299,8 +299,8 @@ export default function BeritaPage({
   useEffect(() => {
     const isArticle = !!activeArticle;
     const title = activeArticle
-      ? `${activeArticle.judul} — Warta & Berita Desa Tugurejo | Tentrem`
-      : 'Warta & Berita Resmi Desa Tugurejo — Portal Tentrem Ponorogo';
+      ? `${activeArticle.judul} | TENTREM`
+      : 'Berita | TENTREM';
     const description =
       activeArticle?.ringkasan ||
       'Pusat informasi, berita resmi, kegiatan masyarakat, pembangunan, siskamling, dan pengumuman Pemerintah Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.';
@@ -467,7 +467,7 @@ export default function BeritaPage({
   // Reset title ke Tentrem saat keluar dari halaman berita
   useEffect(() => {
     return () => {
-      document.title = 'Tentrem - Tugurejo Nyaman Tanggap Responsif Modern';
+      document.title = 'TENTREM | Portal Layanan Publik';
     };
   }, []);
 

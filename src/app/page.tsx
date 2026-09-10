@@ -96,17 +96,17 @@ const FADE_OUT_MS = 140;
 const FADE_IN_DELAY_MS = 0;
 
 const PAGE_META: Record<PageRoute, { title: string; description: string }> = {
-  home: { title: 'TENTREM | Tugurejo Nyaman Tanggap Responsif Modern', description: 'Portal layanan publik Desa Tugurejo, Ponorogo: informasi desa, keamanan lingkungan, jadwal ronda, cuaca BMKG, peta wilayah, dan pengaduan warga.' },
-  profil: { title: 'Profil Desa Tugurejo | TENTREM', description: 'Profil, sejarah, wilayah, dan video Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.' },
-  berita: { title: 'Berita Desa Tugurejo | TENTREM', description: 'Berita, pengumuman, agenda, dan kegiatan terbaru Desa Tugurejo, Ponorogo.' },
-  aduan: { title: 'Pengaduan Warga Desa Tugurejo | TENTREM', description: 'Sampaikan dan lacak pengaduan warga Desa Tugurejo secara mudah melalui portal TENTREM.' },
-  struktur: { title: 'Struktur Satkamling Desa Tugurejo | TENTREM', description: 'Struktur organisasi dan susunan tugas Satkamling Desa Tugurejo.' },
-  galeri: { title: 'Galeri Kegiatan Desa Tugurejo | TENTREM', description: 'Dokumentasi kegiatan warga, ronda, gotong royong, dan Satlinmas Desa Tugurejo.' },
-  kentongan: { title: 'Isyarat Kentongan Desa Tugurejo | TENTREM', description: 'Pelajari kode isyarat kentongan dan gunakan simulator bunyi interaktif TENTREM.' },
-  peta: { title: 'Peta Wilayah Desa Tugurejo | TENTREM', description: 'Peta digital wilayah, poskamling, fasilitas umum, dan zona kerawanan Desa Tugurejo.' },
+  home: { title: 'TENTREM | Portal Layanan Publik', description: 'Portal layanan publik Desa Tugurejo, Ponorogo: informasi desa, keamanan lingkungan, jadwal ronda, cuaca BMKG, peta wilayah, dan pengaduan warga.' },
+  profil: { title: 'Profil & Video | TENTREM', description: 'Profil, sejarah, wilayah, dan video Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.' },
+  berita: { title: 'Berita | TENTREM', description: 'Berita, pengumuman, agenda, dan kegiatan terbaru Desa Tugurejo, Ponorogo.' },
+  aduan: { title: 'Pengaduan Warga | TENTREM', description: 'Sampaikan dan lacak pengaduan warga Desa Tugurejo secara mudah melalui portal TENTREM.' },
+  struktur: { title: 'Struktur Satkamling | TENTREM', description: 'Struktur organisasi dan susunan tugas Satkamling Desa Tugurejo.' },
+  galeri: { title: 'Galeri Kegiatan | TENTREM', description: 'Dokumentasi kegiatan warga, ronda, gotong royong, dan Satlinmas Desa Tugurejo.' },
+  kentongan: { title: 'Isyarat Kentongan | TENTREM', description: 'Pelajari kode isyarat kentongan dan gunakan simulator bunyi interaktif TENTREM.' },
+  peta: { title: 'Peta Wilayah | TENTREM', description: 'Peta digital wilayah, poskamling, fasilitas umum, dan zona kerawanan Desa Tugurejo.' },
   survei: { title: 'Survei Kepuasan Masyarakat | TENTREM', description: 'Isi survei kepuasan layanan publik Desa Tugurejo untuk membantu peningkatan pelayanan.' },
-  cuaca: { title: 'Prakiraan Cuaca Tugurejo | TENTREM', description: 'Prakiraan cuaca BMKG terkini untuk Desa Tugurejo, Kecamatan Slahung, Ponorogo.' },
-  'jadwal-ronda': { title: 'Jadwal Ronda Desa Tugurejo | TENTREM', description: 'Jadwal ronda malam, kelompok bertugas, Danpok, dan anggota aktif Poskamling Desa Tugurejo.' },
+  cuaca: { title: 'Prakiraan Cuaca | TENTREM', description: 'Prakiraan cuaca BMKG terkini untuk Desa Tugurejo, Kecamatan Slahung, Ponorogo.' },
+  'jadwal-ronda': { title: 'Jadwal Ronda | TENTREM', description: 'Jadwal ronda malam, kelompok bertugas, Danpok, dan anggota aktif Poskamling Desa Tugurejo.' },
   'rincian-tugas': { title: 'Rincian Tugas Satlinmas | TENTREM', description: 'Rincian tugas dan fungsi setiap jabatan dalam struktur Satlinmas Desa Tugurejo.' },
   inventaris: { title: 'Inventaris Poskamling | TENTREM', description: 'Daftar aset dan perlengkapan Poskamling Satlinmas Desa Tugurejo.' },
 };
@@ -507,113 +507,6 @@ export default function HomePage() {
               <div id="kontak-darurat-section" className="reveal">
                 <KontakDaruratSection />
               </div>
-
-              {/* ── QUICK ACCESS PORTAL CARDS (BERANDA) ── */}
-              <section className="reveal space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] font-extrabold uppercase tracking-wider mb-2">
-                      Layanan &amp; Informasi Publik
-                    </div>
-                    <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
-                      Portal TENTREM Tugurejo
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {/* Card Profil & Video */}
-                  <div
-                    onClick={() => navigateTo('profil')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-teal-400/60 dark:hover:border-teal-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate">
-                        Profil Desa &amp; Video
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Gambaran wilayah &amp; profil TENTREM</p>
-                    </div>
-                  </div>
-
-                  {/* Card Berita */}
-                  <div
-                    onClick={() => navigateTo('berita')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-emerald-400/60 dark:hover:border-emerald-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors truncate">
-                        Warta &amp; Berita Desa
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Berita, pengumuman &amp; agenda desa</p>
-                    </div>
-                  </div>
-
-                  {/* Card Pengaduan */}
-                  <div
-                    onClick={() => navigateTo('aduan')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-orange-400/60 dark:hover:border-orange-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors truncate">
-                        Kanal Pengaduan Warga
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Laporan &amp; pelacakan tiket 24 jam</p>
-                    </div>
-                  </div>
-
-                  {/* Card Struktur */}
-                  <div
-                    onClick={() => navigateTo('struktur')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-blue-400/60 dark:hover:border-blue-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
-                        Struktur Satkamling
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Bagan komando &amp; tugas Satlinmas</p>
-                    </div>
-                  </div>
-
-                  {/* Card Galeri */}
-                  <div
-                    onClick={() => navigateTo('galeri')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-cyan-400/60 dark:hover:border-cyan-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors truncate">
-                        Galeri Dokumentasi
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Arsip foto ronda &amp; kegiatan desa</p>
-                    </div>
-                  </div>
-
-                  {/* Card Kentongan */}
-                  <div
-                    onClick={() => navigateTo('kentongan')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-amber-400/60 dark:hover:border-amber-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors truncate">
-                        Isyarat Kentongan
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">7 kode &amp; simulator bunyi akustik</p>
-                    </div>
-                  </div>
-
-                  {/* Card Peta */}
-                  <div
-                    onClick={() => navigateTo('peta')}
-                    className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-4 py-3.5 shadow-sm hover:shadow-md hover:border-indigo-400/60 dark:hover:border-indigo-600/50 transition-all duration-200 cursor-pointer flex items-center gap-3.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
-                        Peta Wilayah Digital
-                      </p>
-                      <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">Peta interaktif &amp; pos ronda</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
 
             </main>
           </div>
