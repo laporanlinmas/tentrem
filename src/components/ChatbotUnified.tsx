@@ -348,6 +348,7 @@ export default function ChatbotUnified({
   const [isBusy, setIsBusy]             = useState(false);
   const [pendingPhotos, setPendingPhotos] = useState<ChatPhoto[]>([]);
   const [activeStep, setActiveStep]     = useState<ComplaintStep | null>(null);
+  const [userContext, setUserContext]    = useState<string[]>([]);
 
   const listRef    = useRef<HTMLDivElement>(null);
   const inputRef   = useRef<HTMLTextAreaElement>(null);
@@ -379,6 +380,7 @@ export default function ChatbotUnified({
         ],
         ts: timeNow(),
       }]);
+      setUserContext([]);
       prefetchTentremText();
     }
 
@@ -593,6 +595,10 @@ export default function ChatbotUnified({
       });
     }
 
+    if (text) {
+      setUserContext(prev => [...prev, text].slice(-6));
+    }
+
     // ── If in Complaint Wizard mode ──
     if (draftRef.current) {
       if (draftRef.current.step === 'foto' && photosToSend.length > 0) {
@@ -608,6 +614,11 @@ export default function ChatbotUnified({
     setIsBusy(true);
 
     try {
+      const recentContext = userContext.slice(-3).join(' ');
+      const isFollowUp = /^(iya|ya|terus|lalu|kemudian|bagaimana|caranya|yang tadi|yang itu|lebih detail|jelaskan lagi|maksudnya|berapa|dimana|di mana|kapan|siapa|apa|boleh|bisa|dan|kalau begitu|kalau iya)\b/i.test(text)
+        || /\b(yang tadi|yang itu|hal tersebut|informasi tersebut|maksud saya)\b/i.test(text);
+      const routedText = isFollowUp && recentContext ? `${recentContext} ${text}` : text;
+
       // Direct ticket check
       const ticketMatch = text.match(/ADU-\d{6}-\d{4}/i);
       if (ticketMatch) {
@@ -623,7 +634,7 @@ export default function ChatbotUnified({
       }
 
       // Cek tiket tanpa nomor
-      if (/cek tiket|cek status|lacak tiket|lacak laporan|status laporan/i.test(text) && !ticketMatch) {
+      if (/cek tiket|cek status|lacak tiket|lacak laporan|status laporan/i.test(routedText) && !ticketMatch) {
         addMsg('bot', '🔍 Silakan masukkan **Nomor Tiket** Anda untuk cek status laporan.\n\nFormat nomor tiket: `ADU-YYMMDD-XXXX`\nContoh: `ADU-260821-0001`\n\nAtau buka halaman Pengaduan tab **Lacak Status** untuk melacak laporan:', {
           actions: [
             { label: 'Buka Lacak Status', payload: '__navigate:aduan', type: 'text', icon: <Clock size={13} /> },
@@ -641,7 +652,7 @@ export default function ChatbotUnified({
       }
 
       // Contact officer
-      if (/hubungi|petugas|kontak|piket|telepon|wa linmas|whatsapp petugas|nomor linmas/i.test(text) && !/apa itu|tentang/i.test(text)) {
+      if (/hubungi|petugas|kontak|piket|telepon|wa linmas|whatsapp petugas|nomor linmas/i.test(routedText) && !/apa itu|tentang/i.test(text)) {
         addMsg('bot', '📞 Menghubungkan dengan kontak Petugas Piket Satlinmas...');
         const wa = await fetchWa();
         if (wa && wa.number) {
@@ -669,7 +680,7 @@ export default function ChatbotUnified({
       // ── Smart routing with Direct Actions ────────────────────────────────
 
       // 1. Ronda Malam & Poskamling
-      if (/ronda|siskamling|poskamling|patroli|danpok|jadwal ronda|kelompok ronda|ronda malam/i.test(text)) {
+      if (/ronda|siskamling|poskamling|patroli|danpok|jadwal ronda|kelompok ronda|ronda malam/i.test(routedText)) {
         addMsg('bot', '🛡️ **Jadwal Ronda TENTREM** — Sistem ronda bergilir Desa Tugurejo:\n• Jadwal kelompok ronda bergilir setiap malam\n• Waktu jaga: 21:30 – 02:00 WIB\n• Tersinkron real-time dari Web Admin', {
           actions: [
             { label: 'Lihat Jadwal Ronda', payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> },
@@ -679,7 +690,7 @@ export default function ChatbotUnified({
       }
 
       // 2. Pengaduan / Aduan Masyarakat
-      if (/pengaduan|aduan|lapor|laporkan|komplain|keluhan|buat laporan/i.test(text) && !/ronda|malam/i.test(text)) {
+      if (/pengaduan|aduan|lapor|laporkan|komplain|keluhan|buat laporan/i.test(routedText) && !/ronda|malam/i.test(routedText)) {
         addMsg('bot', '📢 Layanan **Kanal Pengaduan Warga** TENTREM tersedia 24 jam. Anda bisa buat laporan langsung via form atau dipandu chatbot ini:', {
           actions: [
             { label: 'Buka Halaman Pengaduan', payload: '__navigate:aduan', type: 'text', icon: <Megaphone size={13} /> },
@@ -691,7 +702,7 @@ export default function ChatbotUnified({
       }
 
       // 3. Warta & Berita Desa
-      if (/berita|warta|kabar|pengumuman|agenda|artikel desa/i.test(text)) {
+      if (/berita|warta|kabar|pengumuman|agenda|artikel desa/i.test(routedText)) {
         addMsg('bot', '📰 **Warta & Berita Desa Tugurejo** — publikasi resmi agenda desa, gotong royong, kegiatan Satlinmas, dan transparansi pembangunan yang terindeks Google News.', {
           actions: [
             { label: 'Lihat Semua Berita', payload: '__navigate:berita', type: 'text', icon: <Newspaper size={13} /> },
@@ -701,7 +712,7 @@ export default function ChatbotUnified({
       }
 
       // 4. Peta Wilayah
-      if (/peta|map|batas dusun|wilayah desa|zona kerawanan|titik poskamling|peta digital/i.test(text)) {
+      if (/peta|map|batas dusun|wilayah desa|zona kerawanan|titik poskamling|peta digital/i.test(routedText)) {
         addMsg('bot', '🗺️ **Peta Wilayah Digital** Desa Tugurejo — batas dusun Krajan & Tugu, titik poskamling, sarana umum, dan zona mitigasi bencana.', {
           actions: [{ label: 'Buka Peta Wilayah', payload: '__navigate:peta', type: 'text', icon: <Map size={13} /> }],
         });
@@ -709,7 +720,7 @@ export default function ChatbotUnified({
       }
 
       // 5. Cuaca BMKG
-      if (/cuaca|bmkg|hujan|suhu|prakiraan|panas|angin|kelembaban|cuaca ekstrem/i.test(text)) {
+      if (/cuaca|bmkg|hujan|suhu|prakiraan|panas|angin|kelembaban|cuaca ekstrem/i.test(routedText)) {
         addMsg('bot', '🌤️ **Prakiraan Cuaca BMKG** real-time untuk wilayah Tugurejo Slahung: suhu, kelembaban, kecepatan angin, kondisi langit, dan peringatan dini cuaca ekstrem.', {
           actions: [{ label: 'Cek Cuaca BMKG', payload: '__navigate:cuaca', type: 'text', icon: <CloudSun size={13} /> }],
         });
@@ -717,7 +728,7 @@ export default function ChatbotUnified({
       }
 
       // 6. Kentongan
-      if (/kentongan|isyarat kentongan|kode kentongan|bunyi kentongan|pukulan/i.test(text)) {
+      if (/kentongan|isyarat kentongan|kode kentongan|bunyi kentongan|pukulan/i.test(routedText)) {
         addMsg('bot', '🥁 **Isyarat Kentongan** Desa Tugurejo — 7 kode bunyi kentongan tradisional beserta simulator akustik interaktif yang bisa dimainkan langsung.', {
           actions: [{ label: 'Lihat Isyarat Kentongan', payload: '__navigate:kentongan', type: 'text', icon: <Drum size={13} /> }],
         });
@@ -725,7 +736,7 @@ export default function ChatbotUnified({
       }
 
       // 7. Galeri
-      if (/galeri|foto ronda|dokumentasi|album|arsip foto|gambar kegiatan/i.test(text)) {
+      if (/galeri|foto ronda|dokumentasi|album|arsip foto|gambar kegiatan/i.test(routedText)) {
         addMsg('bot', '📷 **Galeri Dokumentasi** Desa Tugurejo — arsip foto ronda malam, gotong royong, kegiatan Satlinmas, dan momen kemasyarakatan desa.', {
           actions: [{ label: 'Lihat Galeri', payload: '__navigate:galeri', type: 'text', icon: <Camera size={13} /> }],
         });
@@ -733,7 +744,7 @@ export default function ChatbotUnified({
       }
 
       // 8. Struktur Organisasi
-      if (/struktur|bagan|organisasi|komando|jabatan satlinmas|hierarki|susunan/i.test(text)) {
+      if (/struktur|bagan|organisasi|komando|jabatan satlinmas|hierarki|susunan/i.test(routedText)) {
         addMsg('bot', '🏛️ **Struktur Satkamling** Desa Tugurejo — bagan komando lengkap, nama, jabatan, foto, dan uraian tugas seluruh anggota Satlinmas.', {
           actions: [{ label: 'Lihat Struktur', payload: '__navigate:struktur', type: 'text', icon: <GitBranch size={13} /> }],
         });
@@ -741,7 +752,7 @@ export default function ChatbotUnified({
       }
 
       // 9. Profil Desa & Video
-      if (/profil|video profil|sejarah desa|tentang desa|gambaran desa/i.test(text)) {
+      if (/profil|video profil|sejarah desa|tentang desa|gambaran desa/i.test(routedText)) {
         addMsg('bot', '🎬 **Profil Desa & Video** TENTREM — gambaran lengkap Desa Tugurejo, sejarah, visi-misi, profil Ahmad Basith (inovator), dan video profil desa.', {
           actions: [{ label: 'Lihat Profil Desa', payload: '__navigate:profil', type: 'text', icon: <Play size={13} /> }],
         });
@@ -749,7 +760,7 @@ export default function ChatbotUnified({
       }
 
       // 10. Survei / IKM
-      if (/survei|ikm|kepuasan|evaluasi|kuesioner|kritik saran|penilaian layanan/i.test(text)) {
+      if (/survei|ikm|kepuasan|evaluasi|kuesioner|kritik saran|penilaian layanan/i.test(routedText)) {
         addMsg('bot', '📋 **Survei Kepuasan Masyarakat (IKM)** — isi formulir digital untuk menilai mutu layanan desa dalam 5 indikator: Kemudahan, Kemanfaatan, Kecepatan, Keakuratan, dan Rekomendasi.', {
           actions: [{ label: 'Isi Survei IKM', payload: '__navigate:survei', type: 'text', icon: <Star size={13} /> }],
         });
@@ -757,7 +768,7 @@ export default function ChatbotUnified({
       }
 
       // 11. Inventaris
-      if (/inventaris|aset poskamling|peralatan|perlengkapan ronda|fasilitas poskamling/i.test(text)) {
+      if (/inventaris|aset poskamling|peralatan|perlengkapan ronda|fasilitas poskamling/i.test(routedText)) {
         addMsg('bot', '📦 **Inventaris Aset Poskamling** — catatan dan manajemen aset peralatan Satlinmas Desa Tugurejo: tongkat, senter, kentongan, P3K, dan perlengkapan patroli.', {
           actions: [{ label: 'Lihat Inventaris', payload: '__navigate:inventaris', type: 'text', icon: <Package size={13} /> }],
         });
@@ -765,7 +776,7 @@ export default function ChatbotUnified({
       }
 
       // 12. Jadwal Ronda / Jadwal Ronda
-      if (/jadwal|smart poskamling|giliran|shift piket|jadwal piket/i.test(text)) {
+      if (/jadwal|smart poskamling|giliran|shift piket|jadwal piket/i.test(routedText)) {
         addMsg('bot', '📅 **Jadwal Ronda (Jadwal Ronda)** — jadwal ronda malam harian digital, kelompok bertugas, nama Danpok aktif, dan status kehadiran ronda terkini.', {
           actions: [{ label: 'Lihat Jadwal Ronda', payload: '__navigate:jadwal-ronda', type: 'text', icon: <ClipboardList size={13} /> }],
         });
@@ -773,7 +784,7 @@ export default function ChatbotUnified({
       }
 
       // 13. Rincian Tugas / Tupoksi
-      if (/tupoksi|rincian tugas|tugas pokok|fungsi jabatan|uraian tugas/i.test(text)) {
+      if (/tupoksi|rincian tugas|tugas pokok|fungsi jabatan|uraian tugas/i.test(routedText)) {
         addMsg('bot', '📌 **Rincian Tugas (Tupoksi)** — detail tugas pokok dan fungsi setiap jabatan dalam struktur Satlinmas Desa Tugurejo, dari komandan hingga anggota.', {
           actions: [{ label: 'Lihat Rincian Tugas', payload: '__navigate:rincian-tugas', type: 'text', icon: <ClipboardList size={13} /> }],
         });
@@ -781,7 +792,7 @@ export default function ChatbotUnified({
       }
 
       // 14. Admin Dashboard
-      if (/admin|dashboard|web admin|login admin|panel admin|administrator/i.test(text)) {
+      if (/admin|dashboard|web admin|login admin|panel admin|administrator/i.test(routedText)) {
         addMsg('bot', '⚙️ **Dashboard Web Admin TENTREM** adalah panel kontrol terpusat untuk Petugas Satlinmas & Admin Desa.\n\nFitur: verifikasi aduan, monitoring ronda, manajemen personil, berita, survei, inventaris, dan laporan resmi (PDF/Excel/DOCX).\n\n*Login menggunakan akun resmi dari Administrator Sistem.*', {
           actions: [
             { label: 'Buka Dashboard Admin', payload: 'https://tentrem.vercel.app', type: 'link', icon: <LayoutDashboard size={13} /> },
@@ -791,7 +802,7 @@ export default function ChatbotUnified({
       }
 
       // 15. Video profil
-      if (/video|youtube|tonton/i.test(text) && !/galeri/i.test(text)) {
+      if (/video|youtube|tonton/i.test(routedText) && !/galeri/i.test(routedText)) {
         addMsg('bot', '🎬 Video profil dan dokumentasi visual Desa Tugurejo tersedia di halaman Profil Desa.', {
           actions: [{ label: 'Tonton Video Profil', payload: '__navigate:profil', type: 'text', icon: <Play size={13} /> }],
         });
@@ -874,7 +885,7 @@ export default function ChatbotUnified({
       }
 
       // Fallback: Knowledge Base
-      const answer = await askChatbot(text);
+      const answer = await askChatbot(text, { userMessages: userContext });
       await typingDelay(answer);
       // Tambahkan quick actions pada fallback agar tetap interaktif
       addMsg('bot', answer, {

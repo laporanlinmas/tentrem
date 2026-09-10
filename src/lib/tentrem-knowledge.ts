@@ -73,6 +73,10 @@ export interface SynthesisResult {
   quality: number;
 }
 
+export interface ConversationContext {
+  userMessages?: string[];
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // EMBEDDED KNOWLEDGE BASE — Lengkap, Akurat, dan Komprehensif
 // ════════════════════════════════════════════════════════════════════════════
@@ -354,6 +358,17 @@ function tokenize(text: string): string[] {
     .filter(t => t.length > 1 && !STOPWORDS.has(t));
 }
 
+function resolveContextualQuery(rawQuery: string, context?: ConversationContext): string {
+  const previous = (context?.userMessages || []).filter(Boolean).slice(-3);
+  if (!previous.length) return rawQuery;
+
+  const normalized = normalizeQuery(rawQuery);
+  const isFollowUp = /^(iya|ya|terus|lalu|kemudian|bagaimana|caranya|yang tadi|yang itu|lebih detail|jelaskan lagi|maksudnya|berapa|dimana|di mana|kapan|siapa|apa|boleh|bisa|dan|kalau begitu|kalau iya)\b/i.test(normalized)
+    || /\b(yang tadi|yang itu|hal tersebut|informasi tersebut|maksud saya)\b/i.test(normalized);
+
+  return isFollowUp ? `${previous.join(' ')} ${rawQuery}` : rawQuery;
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // INTENT RECOGNITION
 // ════════════════════════════════════════════════════════════════════════════
@@ -437,11 +452,12 @@ function scoreChunk(chunk: string, tokens: string[]): number {
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN ASK CHATBOT PIPELINE
 // ════════════════════════════════════════════════════════════════════════════
-export async function askChatbot(userQuery: string): Promise<string> {
+export async function askChatbot(userQuery: string, context?: ConversationContext): Promise<string> {
   const rawQuery = userQuery.trim();
   if (!rawQuery) return 'Halo! Ada yang bisa saya bantu terkait sistem TENTREM Desa Tugurejo?';
 
-  const normalized = normalizeQuery(rawQuery);
+  const contextualQuery = resolveContextualQuery(rawQuery, context);
+  const normalized = normalizeQuery(contextualQuery);
   const intentResult = detectIntent(normalized);
 
   // ── 1. Instant Intent Matches ──────────────────────────────────────────────
@@ -579,19 +595,19 @@ export async function askChatbot(userQuery: string): Promise<string> {
   // ── 26. Knowledge Base Retrieval (Fallback) — Smart 5W1H Synthesis ─────────
   const knowledge = await getTentremText();
   const chunks = splitIntoChunks(knowledge);
-  const tokens = tokenize(rawQuery);
+  const tokens = tokenize(contextualQuery);
 
   if (tokens.length === 0) {
     return 'Mohon ajukan pertanyaan yang lebih spesifik seputar layanan TENTREM, Satlinmas Desa Tugurejo, Poskamling, Bencana, atau informasi desa. Saya siap membantu! 😊';
   }
 
   // Deteksi tipe pertanyaan 5W1H untuk kontrol panjang jawaban
-  const isWho   = /siapa|who\b|nama siapa|orangnya/i.test(rawQuery);
-  const isWhat  = /\bapa\b|what\b|definisi|artinya|pengertian/i.test(rawQuery);
-  const isWhere = /\bdimana\b|\bdi mana\b|lokasi|alamat|letak|terletak/i.test(rawQuery);
-  const isWhen  = /\bkapan\b|jadwal|jam berapa|waktu|tanggal/i.test(rawQuery);
-  const isWhy   = /kenapa|mengapa|alasan|tujuan|fungsi/i.test(rawQuery);
-  const isHow   = /bagaimana|cara |gimana|langkah|prosedur/i.test(rawQuery);
+  const isWho   = /siapa|who\b|nama siapa|orangnya/i.test(contextualQuery);
+  const isWhat  = /\bapa\b|what\b|definisi|artinya|pengertian/i.test(contextualQuery);
+  const isWhere = /\bdimana\b|\bdi mana\b|lokasi|alamat|letak|terletak/i.test(contextualQuery);
+  const isWhen  = /\bkapan\b|jadwal|jam berapa|waktu|tanggal/i.test(contextualQuery);
+  const isWhy   = /kenapa|mengapa|alasan|tujuan|fungsi/i.test(contextualQuery);
+  const isHow   = /bagaimana|cara |gimana|langkah|prosedur/i.test(contextualQuery);
 
   // Tentukan maks kalimat berdasarkan tipe pertanyaan
   const maxSentences = isWho || isWhere || isWhen ? 1
