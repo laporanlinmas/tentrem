@@ -96,19 +96,58 @@ const FADE_OUT_MS = 140;
 const FADE_IN_DELAY_MS = 0;
 
 const PAGE_META: Record<PageRoute, { title: string; description: string }> = {
-  home: { title: 'TENTREM | Portal Layanan Publik', description: 'Portal layanan publik Desa Tugurejo, Ponorogo: informasi desa, keamanan lingkungan, jadwal ronda, cuaca BMKG, peta wilayah, dan pengaduan warga.' },
-  profil: { title: 'Profil & Video | TENTREM', description: 'Profil, sejarah, wilayah, dan video Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.' },
-  berita: { title: 'Berita | TENTREM', description: 'Berita, pengumuman, agenda, dan kegiatan terbaru Desa Tugurejo, Ponorogo.' },
-  aduan: { title: 'Pengaduan Warga | TENTREM', description: 'Sampaikan dan lacak pengaduan warga Desa Tugurejo secara mudah melalui portal TENTREM.' },
-  struktur: { title: 'Struktur Satkamling | TENTREM', description: 'Struktur organisasi dan susunan tugas Satkamling Desa Tugurejo.' },
-  galeri: { title: 'Galeri Kegiatan | TENTREM', description: 'Dokumentasi kegiatan warga, ronda, gotong royong, dan Satlinmas Desa Tugurejo.' },
-  kentongan: { title: 'Isyarat Kentongan | TENTREM', description: 'Pelajari kode isyarat kentongan dan gunakan simulator bunyi interaktif TENTREM.' },
-  peta: { title: 'Peta Wilayah | TENTREM', description: 'Peta digital wilayah, poskamling, fasilitas umum, dan zona kerawanan Desa Tugurejo.' },
-  survei: { title: 'Survei Kepuasan Masyarakat | TENTREM', description: 'Isi survei kepuasan layanan publik Desa Tugurejo untuk membantu peningkatan pelayanan.' },
-  cuaca: { title: 'Prakiraan Cuaca | TENTREM', description: 'Prakiraan cuaca BMKG terkini untuk Desa Tugurejo, Kecamatan Slahung, Ponorogo.' },
-  'jadwal-ronda': { title: 'Jadwal Ronda | TENTREM', description: 'Jadwal ronda malam, kelompok bertugas, Danpok, dan anggota aktif Poskamling Desa Tugurejo.' },
-  'rincian-tugas': { title: 'Rincian Tugas Satlinmas | TENTREM', description: 'Rincian tugas dan fungsi setiap jabatan dalam struktur Satlinmas Desa Tugurejo.' },
-  inventaris: { title: 'Inventaris Poskamling | TENTREM', description: 'Daftar aset dan perlengkapan Poskamling Satlinmas Desa Tugurejo.' },
+  home: {
+    title: 'Tentrem - Tugurejo Nyaman Tanggap Responsif Modern',
+    description: 'Sistem informasi Poskamling RT 01 RW 01 Desa Tugurejo untuk mendukung keamanan lingkungan, jadwal ronda, informasi kegiatan, pengaduan warga, dan koordinasi keamanan.'
+  },
+  profil: {
+    title: 'Profil Poskamling | TENTREM',
+    description: 'Profil Poskamling RT 01 RW 01 Desa Tugurejo, sejarah, lingkungan, kegiatan, dan informasi keamanan warga.'
+  },
+  berita: {
+    title: 'Berita & Kegiatan | TENTREM',
+    description: 'Berita, pengumuman, agenda, dan kegiatan keamanan lingkungan Poskamling RT 01 RW 01 Tugurejo.'
+  },
+  aduan: {
+    title: 'Pengaduan Warga | TENTREM',
+    description: 'Sampaikan dan lacak pengaduan atau laporan warga terkait keamanan dan ketertiban lingkungan RT 01 RW 01 Tugurejo.'
+  },
+  struktur: {
+    title: 'Struktur Poskamling | TENTREM',
+    description: 'Struktur organisasi, susunan pengurus, kelompok ronda, dan pembagian tugas Poskamling RT 01 RW 01 Tugurejo.'
+  },
+  galeri: {
+    title: 'Galeri Kegiatan | TENTREM',
+    description: 'Dokumentasi kegiatan ronda malam, gotong royong, keamanan lingkungan, dan kegiatan Poskamling RT 01 RW 01 Tugurejo.'
+  },
+  kentongan: {
+    title: 'Isyarat Kentongan | TENTREM',
+    description: 'Pelajari tanda dan kode isyarat kentongan untuk komunikasi keamanan lingkungan serta gunakan simulator bunyi kentongan interaktif.'
+  },
+  peta: {
+    title: 'Peta Desa Tugurejo | TENTREM',
+    description: 'Peta digital lingkungan RT 01 RW 01 Tugurejo, lokasi Poskamling, fasilitas lingkungan, dan titik penting di sekitar wilayah.'
+  },
+  survei: {
+    title: 'Kritik dan Saran | TENTREM',
+    description: 'Isi survei kepuasan (kritik dan saran) terhadap kegiatan dan pelayanan Poskamling RT 01 RW 01 Tugurejo untuk membantu meningkatkan keamanan lingkungan.'
+  },
+  cuaca: {
+    title: 'Prakiraan Cuaca | TENTREM',
+    description: 'Prakiraan cuaca terkini untuk mendukung kesiapsiagaan kegiatan ronda malam dan keamanan lingkungan RT 01 RW 01 Tugurejo.'
+  },
+  'jadwal-ronda': {
+    title: 'Jadwal Ronda | TENTREM',
+    description: 'Jadwal ronda malam, kelompok bertugas, Danpok, dan anggota ronda Poskamling RT 01 RW 01 Tugurejo.'
+  },
+  'rincian-tugas': {
+    title: 'Rincian Tugas | TENTREM',
+    description: 'Rincian tugas dan tanggung jawab pengurus, kelompok ronda, dan anggota Poskamling RT 01 RW 01 Tugurejo.'
+  },
+  inventaris: {
+    title: 'Inventaris Poskamling | TENTREM',
+    description: 'Daftar aset, sarana, prasarana, dan perlengkapan yang tersedia di Poskamling RT 01 RW 01 Tugurejo.'
+  },
 };
 
 // ─── URL parsing & routing helpers ──────────────────────────────────────────

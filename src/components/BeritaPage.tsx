@@ -298,20 +298,19 @@ export default function BeritaPage({
   // Keep browser/share metadata aligned with the article currently open (Maximum Google Search & News SEO)
   useEffect(() => {
     const isArticle = !!activeArticle;
+    const pageTitle = 'Berita & Kegiatan | TENTREM';
     const title = activeArticle
       ? `${activeArticle.judul} | TENTREM`
-      : 'Berita | TENTREM';
+      : pageTitle;
     const description =
       activeArticle?.ringkasan ||
-      'Pusat informasi, berita resmi, kegiatan masyarakat, pembangunan, siskamling, dan pengumuman Pemerintah Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo.';
+      'Berita, pengumuman, agenda, dan kegiatan keamanan lingkungan Poskamling RT 01 RW 01 Tugurejo.';
     const slug = activeArticle?.slug || activeArticle?.id;
     const canonicalUrl = slug
       ? `${window.location.origin}/berita/${encodeURIComponent(slug)}`
       : `${window.location.origin}/berita`;
     const imageUrl =
       activeArticle?.gambarUtama || `${window.location.origin}/assets/tugurejo.webp`;
-
-    document.title = title;
 
     // ISO dates for schema & meta
     let pubIso = new Date().toISOString();
@@ -463,13 +462,6 @@ export default function BeritaPage({
       scriptTag.textContent = JSON.stringify(listSchema, null, 2);
     }
   }, [activeArticle, beritaList]);
-
-  // Reset title ke Tentrem saat keluar dari halaman berita
-  useEffect(() => {
-    return () => {
-      document.title = 'TENTREM | Portal Layanan Publik';
-    };
-  }, []);
 
   // Real Visitor / Reader Counter increment in Firestore
   const trackRealView = (item: BeritaItem) => {
