@@ -3,18 +3,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   PhoneCall,
-  ShieldCheck,
-  Search,
   Phone,
   Clock,
   User,
-  Shield,
-  HeartPulse,
-  Flame,
-  CloudLightning,
-  Zap,
-  ShieldAlert,
-  Building2,
 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -249,7 +240,6 @@ export default function KontakDaruratSection({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-blue-500" />
               Direktori Instansi &amp; Layanan Publik
             </h4>
             <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -264,9 +254,8 @@ export default function KontakDaruratSection({
               placeholder="Cari instansi, no darurat..."
               value={kontakSearchQuery}
               onChange={(e) => setKontakSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
 
@@ -280,61 +269,10 @@ export default function KontakDaruratSection({
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            {filteredKontakDarurat.map((k, idx) => {
-              // Tentukan warna & icon berdasarkan nama instansi
+            {filteredKontakDarurat.map((k) => {
               const nm = k.nama.toLowerCase();
               const jb = (k.jabatan || '').toLowerCase();
-              let accent = 'border-blue-200 dark:border-blue-900/40 bg-blue-50/50 dark:bg-blue-950/20';
-              let iconBg  = 'bg-blue-500/10 text-blue-600 dark:text-blue-400';
-              let badgeBg = 'bg-blue-500 text-white';
-              let InstIcon: React.ElementType = Phone;
-
-              if (nm.includes('kantor desa') || nm.includes('balai desa') || jb.includes('pemerintah desa')) {
-                accent  = 'border-amber-200 dark:border-amber-900/40 bg-amber-50/50 dark:bg-amber-950/20';
-                iconBg  = 'bg-amber-500/10 text-amber-600 dark:text-amber-400';
-                badgeBg = 'bg-amber-500 text-white';
-                InstIcon = Building2;
-              } else if (nm.includes('ketua rt') || nm.includes('ketua rw') || nm.includes('rt ') || nm.includes('rw ')) {
-                accent  = 'border-teal-200 dark:border-teal-900/40 bg-teal-50/50 dark:bg-teal-950/20';
-                iconBg  = 'bg-teal-500/10 text-teal-600 dark:text-teal-400';
-                badgeBg = 'bg-teal-500 text-white';
-                InstIcon = User;
-              } else if (nm.includes('polsek') || nm.includes('polres') || nm.includes('polisi') || nm.includes('babinkamtibmas') || nm.includes('bhabinkamtibmas')) {
-                accent  = 'border-indigo-200 dark:border-indigo-900/40 bg-indigo-50/50 dark:bg-indigo-950/20';
-                iconBg  = 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400';
-                badgeBg = 'bg-indigo-500 text-white';
-                InstIcon = ShieldCheck;
-              } else if (nm.includes('koramil') || nm.includes('babinsa') || nm.includes('tni') || jb.includes('kodim') || jb.includes('koramil')) {
-                accent  = 'border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20';
-                iconBg  = 'bg-slate-500/10 text-slate-600 dark:text-slate-400';
-                badgeBg = 'bg-slate-600 text-white';
-                InstIcon = Shield;
-              } else if (nm.includes('puskesmas') || nm.includes('ambulans') || nm.includes('rsud') || nm.includes('spgdt') || nm.includes('119') || nm.includes('psc') || nm.includes('call center') || jb.includes('kesehatan')) {
-                accent  = 'border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/50 dark:bg-emerald-950/20';
-                iconBg  = 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400';
-                badgeBg = 'bg-emerald-500 text-white';
-                InstIcon = HeartPulse;
-              } else if (nm.includes('damkar') || nm.includes('kebakaran') || nm.includes('pemadam')) {
-                accent  = 'border-orange-200 dark:border-orange-900/40 bg-orange-50/50 dark:bg-orange-950/20';
-                iconBg  = 'bg-orange-500/10 text-orange-600 dark:text-orange-400';
-                badgeBg = 'bg-orange-500 text-white';
-                InstIcon = Flame;
-              } else if (nm.includes('bpbd') || nm.includes('bencana') || nm.includes('banjir') || nm.includes('pusdalops')) {
-                accent  = 'border-cyan-200 dark:border-cyan-900/40 bg-cyan-50/50 dark:bg-cyan-950/20';
-                iconBg  = 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400';
-                badgeBg = 'bg-cyan-500 text-white';
-                InstIcon = CloudLightning;
-              } else if (nm.includes('pln') || nm.includes('listrik') || jb.includes('listrik')) {
-                accent  = 'border-yellow-200 dark:border-yellow-900/40 bg-yellow-50/50 dark:bg-yellow-950/20';
-                iconBg  = 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400';
-                badgeBg = 'bg-yellow-500 text-white';
-                InstIcon = Zap;
-              } else if (nm.includes('satpol') || nm.includes('satlinmas') || nm.includes('linmas')) {
-                accent  = 'border-red-200 dark:border-red-900/40 bg-red-50/50 dark:bg-red-950/20';
-                iconBg  = 'bg-red-500/10 text-red-600 dark:text-red-400';
-                badgeBg = 'bg-red-500 text-white';
-                InstIcon = ShieldAlert;
-              }
+              const accent = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900';
 
               // Tentukan logo path berdasarkan nama/id instansi
               let logoPath: string | null = null;
@@ -361,45 +299,33 @@ export default function KontakDaruratSection({
                 >
                   {/* Header card */}
                   <div className="p-4 space-y-2.5">
-                    {/* Baris atas: badge nomor + logo/icon + nama */}
-                    <div className="flex items-center gap-2.5">
-                      <span className={`w-6 h-6 rounded-full ${badgeBg} flex items-center justify-center text-[10px] font-black shrink-0`}>
-                        {idx + 1}
-                      </span>
-                      <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-white/80 dark:bg-white/10">
-                        {logoPath ? (
+                    <div className="flex items-center gap-3">
+                      {logoPath && (
+                        <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-slate-50 dark:bg-white/10">
                           <img
                             src={logoPath}
                             alt={k.nama}
                             className="w-8 h-8 object-contain"
                             loading="lazy"
                           />
-                        ) : (
-                          <div className={`w-8 h-8 rounded-lg ${iconBg} flex items-center justify-center`}>
-                            <InstIcon className="w-4 h-4" />
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                       <h5 className="text-sm font-black text-slate-900 dark:text-white leading-snug flex-1 min-w-0">
                         {k.nama}
                       </h5>
                     </div>
 
-                    {/* Nomor — icon telepon sejajar vertikal dengan icon instansi di atas */}
-                    {/* badge w-6(24px) + gap-2.5(10px) = 34px → sejajar kiri icon instansi */}
-                    <div className="pl-[42px] space-y-0.5">
+                    <div className="space-y-0.5">
                       {k.noHp && (
                         <a
                           href={`tel:${k.noHp}`}
-                          className="flex items-center gap-1.5 text-sm font-black text-slate-800 dark:text-slate-100 hover:text-red-600 dark:hover:text-red-400 transition-colors font-mono"
+                          className="text-sm font-black text-slate-800 dark:text-slate-100 hover:text-red-600 dark:hover:text-red-400 transition-colors font-mono"
                         >
-                          <Phone className="w-4 h-4 shrink-0 text-red-500" />
                           <span className="tracking-wider">{k.noHp}</span>
                         </a>
                       )}
                       {k.noWa && k.noWa !== k.noHp && (
-                        <div className="flex items-center gap-1.5 text-sm text-emerald-600 dark:text-emerald-400 font-black font-mono">
-                          <span className="w-4 h-4 shrink-0 flex items-center justify-center"><WhatsAppIcon size={14} /></span>
+                        <div className="text-sm text-emerald-600 dark:text-emerald-400 font-black font-mono">
                           <span className="tracking-wider">{k.noWa}</span>
                         </div>
                       )}
@@ -411,9 +337,8 @@ export default function KontakDaruratSection({
                     {k.noHp && (
                       <a
                         href={`tel:${k.noHp}`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-black transition-colors shadow-sm"
+                        className="flex-1 inline-flex items-center justify-center px-3 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-black transition-colors shadow-sm"
                       >
-                        <Phone className="w-3.5 h-3.5" />
                         Telepon
                       </a>
                     )}
@@ -422,9 +347,8 @@ export default function KontakDaruratSection({
                         href={`https://wa.me/${k.noWa.replace(/\D/g, '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black transition-colors shadow-sm"
+                        className="flex-1 inline-flex items-center justify-center px-3 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black transition-colors shadow-sm"
                       >
-                        <WhatsAppIcon size={13} />
                         WhatsApp
                       </a>
                     )}
