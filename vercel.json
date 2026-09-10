@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/submit-complaint.ts": { "maxDuration": 60 },
+    "api/submit-survey.ts":    { "maxDuration": 30 }
+  },
+  "rewrites": [
+    { "source": "/berita", "destination": "/index.html" },
+    { "source": "/berita/:slug*", "destination": "/index.html" },
+    { "source": "/survey", "destination": "/index.html" },
+    { "source": "/aduan", "destination": "/index.html" },
+    { "source": "/pengaduan", "destination": "/index.html" }
+  ]
+}

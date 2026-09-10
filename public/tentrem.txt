@@ -1,0 +1,89 @@
+# ==============================================================================
+# BASIS PENGETAHUAN RESMI SISTEM TENTREM DESA TUGUREJO KABUPATEN PONOROGO
+# TENTREM: Tanggap, Efektif, Nyaman, Tertib, Responsif, Edukatif, Modern
+# ==============================================================================
+
+[PROFIL UMUM & IDENTITAS SISTEM]
+Nama Sistem: TENTREM (Sistem Informasi & Layanan Terpadu Ketentraman, Ketertiban Umum, dan Mitigasi Bencana Desa Tugurejo)
+Lokasi: Desa Tugurejo, Kecamatan Slahung, Kabupaten Ponorogo, Provinsi Jawa Timur, Indonesia.
+Kode Pos: 63463.
+Inovator & Pengembang Sistem: Ahmad Basith (Aparatur Sipil Negara / ASN Satuan Polisi Pamong Praja Kabupaten Ponorogo).
+Pembina & Penanggung Jawab: Erry Setiyoso Birowo, SP (Kepala Bidang Sumber Daya Aparatur dan Perlindungan Masyarakat / Kabid SDA & Linmas Satpol PP Kabupaten Ponorogo).
+Institusi Pembina: Satuan Polisi Pamong Praja (Satpol PP) Kabupaten Ponorogo bekerjasama dengan Pemerintah Desa Tugurejo.
+
+[VISI, MISI & TUJUAN TENTREM]
+1. Visi: Terwujudnya lingkungan Desa Tugurejo yang aman, tentram, tertib, tangguh bencana, dan berbasis pelayanan digital modern yang transparan.
+2. Misi:
+   - Meningkatkan kesiapsiagaan Satlinmas dan masyarakat dalam menjaga keamanan dan ketertiban lingkungan.
+   - Menyediakan kanal pengaduan masyarakat yang cepat, mudah diakses, akurat dengan titik GPS, dan terpantau proses penanganannya.
+   - Memperkuat mitigasi dan respons cepat tanggap darurat terhadap potensi bencana alam di wilayah perbukitan.
+   - Menghadirkan keterbukaan informasi publik desa melalui berita dan prakiraan cuaca real-time.
+   - Mengukur mutu kepuasan publik secara berkala demi peningkatan pelayanan desa yang berkelanjutan.
+
+[KARAKTERISTIK GEOGRAFIS & WILAYAH DESA TUGUREJO]
+1. Letak Wilayah:
+   - Desa Tugurejo terletak di bagian selatan Kabupaten Ponorogo, berada di wilayah Kecamatan Slahung.
+   - Berada pada koridor strategis perlintasan jalan utama yang menghubungkan Kabupaten Ponorogo dengan Kabupaten Pacitan.
+2. Topografi & Bentang Alam:
+   - Wilayah Desa Tugurejo didominasi oleh bentang alam perbukitan, lereng pegunungan, dan lembah dataran yang subur.
+   - Dikelilingi kontur perbukitan hijau dengan vegetasi hutan rakyat, kebun cengkeh, jati, dan persawahan terasering.
+3. Pembagian Dusun / Wilayah:
+   - Dusun Krajan (Pusat pemerintahan desa, permukiman warga, dan kegiatan ekonomi).
+   - Dusun Tugu (Kawasan pemukiman perbukitan dan lahan pertanian/perkebunan).
+   - Posko Induk Keamanan bertempat di Balai Desa Tugurejo.
+4. Demografi & Mata Pencaharian:
+   - Mayoritas penduduk bermata pencaharian sebagai petani, pekebun, peternak, pedagang, wiraswasta, dan aparatur sipil.
+   - Tradisi kearifan lokal gotong royong, sambatan, dan ronda malam poskamling masih sangat kuat dan lestari.
+
+[POTENSI KEBENCANAAN & PANDUAN MITIGASI TANGGAP DARURAT]
+1. Karakteristik Kerawanan Bencana:
+   - Tanah Longsor & Amblesan: Mengingat kontur tanah perbukitan dan lereng terjal, potensi tanah longsor meningkat terutama saat musim penghujan dengan intensitas curah hujan tinggi yang berdurasi lama.
+   - Banjir Luapan & Genangan Drainase: Sedimentasi pada saluran drainase atau aliran anak sungai lembah dapat memicu luapan air ke badan jalan dan pemukiman warga.
+   - Pohon Tumbang & Angin Kencang: Angin kencang atau puting beliung berisiko menumbangkan pohon-pohon besar di sepanjang jalur perlintasan dan sekitar rumah warga.
+2. Kesiapsiagaan & Mitigasi Linmas:
+   - Deteksi Dini: Personil Satlinmas secara rutin memantau tanda-tanda retakan tanah pada tebing lereng dan debit air saluran pembuangan.
+   - Posko Siaga 24 Jam: Posko Satlinmas Desa Tugurejo siaga menerima laporan darurat dan langsung berkoordinasi dengan BPBD Kabupaten Ponorogo, Satpol PP Ponorogo, Koramil Slahung, dan Polsek Slahung.
+   - Jalur Evakuasi: Masyarakat dihimbau mengenali titik kumpul aman di lapangan terbuka atau Balai Desa bila terjadi pergerakan tanah.
+3. Prosedur Lapor Darurat:
+   - Warga dapat segera melapor melalui menu Pengaduan di website TENTREM atau menghubungi nomor WhatsApp petugas piket siaga Linmas.
+
+[SATLINMAS DESA TUGUREJO & SATLINMAS KABUPATEN PONOROGO]
+1. Kedudukan & Peran:
+   - Satlinmas (Satuan Perlindungan Masyarakat) Desa Tugurejo adalah garda terdepan di tingkat desa dalam penyelenggaraan ketentraman, ketertiban umum, dan perlindungan warga.
+   - Dibina langsung oleh Satpol PP Kabupaten Ponorogo di bawah arahan Kabid SDA & Linmas Erry Setiyoso Birowo, SP.
+2. Tugas Pokok Satlinmas:
+   - Membantu pemeliharaan ketentraman, ketertiban umum, dan keamanan lingkungan (Trantibum).
+   - Membantu penanganan ketentraman saat kegiatan sosial, budaya, keagamaan, dan pesta demokrasi (Pemilu/Pilkades).
+   - Membantu penanggulangan dan evakuasi bencana alam secara cepat.
+   - Melaksanakan ronda malam berkala di Poskamling Dusun Krajan, Poskamling Dusun Tugu, dan posko keamanan wilayah.
+   - Bersinergi aktif bersama Babinsa (TNI) dan Bhabinkamtibmas (Polri).
+
+[POSKAMLING & SISTEM KEAMANAN LINGKUNGAN DESA]
+1. Pos Ronda / Poskamling Aktif:
+   - Poskamling Dusun Krajan: Pusat pengawasan keamanan pemukiman warga dan jalur lingkungan utama.
+   - Poskamling Dusun Tugu: Pos pemantauan kawasan perbukitan dan pos ronda malam warga.
+   - Posko Induk Trantibum Balai Desa: Pusat koordinasi regu piket dan komando siaga Satlinmas.
+2. Fasilitas Poskamling:
+   - Dilengkapi kentongan tradisional, tongkat pengaman, senter penerangan, kotak P3K darurat, dan buku mutasi jaga malam.
+
+[FITUR & LAYANAN UTAMA PORTAL TENTREM]
+1. Layanan Pengaduan Masyarakat Online:
+   - Warga dapat melaporkan masalah ketertiban umum, kebersihan & sampah liar, kerusakan fasilitas umum (jalan berlubang, lampu PJU padam), parkir liar, pelanggaran PKL, dan gangguan keamanan.
+   - Mendukung bukti foto langsung dari Kamera (dengan pembacaan otomatis koordinat GPS lokasi tanpa watermark) maupun upload dari Galeri HP.
+   - Menghasilkan nomor tiket resmi (contoh: ADU-260821-0001) yang dapat dilacak status verifikasi dan tindak lanjutnya secara real-time.
+2. Peta Digital Wilayah Desa Tugurejo:
+   - Memetakan batas dusun, persebaran poskamling, sarana publik, dan zona mitigasi kerawanan lingkungan.
+3. Prakiraan Cuaca BMKG Real-Time:
+   - Menyajikan informasi cuaca terkini, prakiraan hujan harian, suhu, kelembaban, dan kecepatan angin wilayah Tugurejo Slahung.
+4. Warta & Berita Resmi Desa:
+   - Publikasi resmi agenda desa, gotong royong warga, kegiatan pembinaan Linmas, dan transparansi pembangunan desa.
+5. Survei Evaluasi Kepuasan Masyarakat (IKM):
+   - Formulir digital bagi warga untuk memberikan penilaian terhadap mutu layanan publik desa dalam 5 indikator: Kemudahan, Kemanfaatan, Kecepatan, Keakuratan, dan Rekomendasi Layanan.
+6. Kontak Petugas Piket & Hotline Darurat:
+   - Akses nomor WhatsApp resmi regu piket Linmas yang siap melayani 24 jam.
+
+[PERTANYAAN UMUM / FAQ & PANDUAN CEPAT]
+- Bagaimana cara membuat aduan? Buka menu Pengaduan, isi nama, nomor WA, pilih kategori dan tanggal kejadian, masukkan lokasi (atau klik Ambil Lokasi GPS), jelaskan kronologi, unggah foto bukti, lalu klik Kirim Laporan.
+- Bagaimana cara mengecek status aduan? Buka tab 'Lacak Status' pada halaman Pengaduan, masukkan nomor tiket resmi Anda (contoh: ADU-260821-0001), dan klik Cari Tiket.
+- Siapa yang merespons aduan warga? Laporan diverifikasi dan ditindaklanjuti oleh regu piket Satlinmas Desa Tugurejo yang berkoordinasi dengan Pemerintah Desa dan Satpol PP Ponorogo.
+- Apakah ada biaya untuk menggunakan layanan TENTREM? Seluruh layanan pengaduan dan informasi di sistem TENTREM adalah GRATIS untuk seluruh warga masyarakat.
