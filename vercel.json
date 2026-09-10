@@ -4,10 +4,29 @@
     "api/submit-survey.ts":    { "maxDuration": 30 }
   },
   "rewrites": [
+    { "source": "/profil", "destination": "/index.html" },
+    { "source": "/profil-desa", "destination": "/index.html" },
+    { "source": "/video", "destination": "/index.html" },
     { "source": "/berita", "destination": "/index.html" },
     { "source": "/berita/:slug*", "destination": "/index.html" },
-    { "source": "/survey", "destination": "/index.html" },
     { "source": "/aduan", "destination": "/index.html" },
-    { "source": "/pengaduan", "destination": "/index.html" }
+    { "source": "/pengaduan", "destination": "/index.html" },
+    { "source": "/struktur", "destination": "/index.html" },
+    { "source": "/struktur-organisasi", "destination": "/index.html" },
+    { "source": "/galeri", "destination": "/index.html" },
+    { "source": "/galeri-kegiatan", "destination": "/index.html" },
+    { "source": "/kentongan", "destination": "/index.html" },
+    { "source": "/isyarat-kentongan", "destination": "/index.html" },
+    { "source": "/peta", "destination": "/index.html" },
+    { "source": "/peta-wilayah", "destination": "/index.html" },
+    { "source": "/survei", "destination": "/index.html" },
+    { "source": "/kritik-saran", "destination": "/index.html" },
+    { "source": "/survey", "destination": "/index.html" },
+    { "source": "/cuaca", "destination": "/index.html" },
+    { "source": "/prakiraan-cuaca", "destination": "/index.html" },
+    { "source": "/jadwal-ronda", "destination": "/index.html" },
+    { "source": "/rincian-tugas", "destination": "/index.html" },
+    { "source": "/tupoksi", "destination": "/index.html" },
+    { "source": "/inventaris", "destination": "/index.html" }
   ]
 }
