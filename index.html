@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- ══ Security Headers (meta fallback) ════════════════════════════════ -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self), payment=()" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta name="theme-color" content="#10b981" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+
+    <title>Tentrem - Tugurejo Nyaman Tanggap Responsif Modern</title>
+    <meta name="description" content="Sistem informasi Poskamling RT 01 RW 01 Desa Tugurejo untuk mendukung keamanan lingkungan, jadwal ronda, informasi kegiatan, pengaduan warga, dan koordinasi keamanan." />
+    <meta name="keywords" content="TENTREM, Tugurejo, Tugurejo Nyaman Tanggap Responsif Modern, Slahung, Ponorogo, Peta Wilayah, BMKG, Pengaduan, Satlinmas, Layanan Publik" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="application-name" content="TENTREM" />
+    <meta name="apple-mobile-web-app-title" content="TENTREM" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="TENTREM" />
+    <meta property="og:title" content="Tentrem - Tugurejo Nyaman Tanggap Responsif Modern" />
+    <meta property="og:description" content="Sistem informasi Poskamling RT 01 RW 01 Desa Tugurejo untuk mendukung keamanan lingkungan, jadwal ronda, informasi kegiatan, pengaduan warga, dan koordinasi keamanan." />
+    <meta property="og:image" content="https://tentrem.ponorogo.go.id/assets/tugurejo.webp" />
+    <meta property="og:image:alt" content="Panorama Desa Tugurejo — Portal TENTREM" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:url" content="https://tentrem.ponorogo.go.id/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tentrem - Tugurejo Nyaman Tanggap Responsif Modern" />
+    <meta name="twitter:description" content="Sistem informasi Poskamling RT 01 RW 01 Desa Tugurejo untuk mendukung keamanan lingkungan, jadwal ronda, informasi kegiatan, pengaduan warga, dan koordinasi keamanan." />
+    <meta name="twitter:image" content="https://tentrem.ponorogo.go.id/assets/tugurejo.webp" />
+    <meta name="twitter:image:alt" content="Panorama Desa Tugurejo — Portal TENTREM" />
+
+    <!-- ══ Favicon ═════════════════════════════════════════════════════════ -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://tentrem.ponorogo.go.id/" />
+
+    <!-- ══ Critical Preloads ════════════════════════════════════════════════ -->
+    <!-- First panorama — LCP hint so browser starts fetching early -->
+    <link rel="preload" as="image" href="/assets/tugurejo.webp" fetchpriority="high" />
+
+    <!-- ══ Fonts & External Resources ══════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+    <!-- Font loading: display=swap agar teks langsung terbaca pakai fallback, font asli swap masuk setelah load -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ══ JSON-LD Structured Data ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "GovernmentOrganization",
+            "name": "TENTREM — Tugurejo Nyaman Tanggap Responsif Modern",
+            "url": "https://tentrem.ponorogo.go.id",
+            "logo": "https://tentrem.ponorogo.go.id/assets/icon-512.png",
+            "description": "TENTREM (Tugurejo Nyaman Tanggap Responsif Modern) — Portal layanan informasi terpadu, peta wilayah & keamanan, prakiraan cuaca BMKG, dan kanal pengaduan masyarakat Desa Tugurejo, Ponorogo."
+          },
+          {
+            "@type": "WebSite",
+            "name": "TENTREM",
+            "url": "https://tentrem.ponorogo.go.id",
+            "inLanguage": "id-ID",
+            "description": "TENTREM (Tugurejo Nyaman Tanggap Responsif Modern) — Portal layanan informasi terpadu, peta wilayah & keamanan, prakiraan cuaca BMKG, dan kanal pengaduan masyarakat Desa Tugurejo, Ponorogo."
+          }
+        ]
+      }
+    </script>
+
+    <!-- ══ Anti-Flash Dark Mode (inline, runs before paint) ════════════════ -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <style>
+      :root { --font-inter: 'Inter', sans-serif; }
+      html, body {
+        touch-action: pan-x pan-y;
+      }
+      body  {
+        font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      /* First paint stays intentionally quiet: a clean background until React is ready. */
+      #root { min-height: 100vh; background: #f8fafc; }
+      html.dark #root { background: #020617; }
+
+      /* Garantikan font-display: swap untuk semua @font-face Google Fonts yang dimuat */
+      @font-face { font-family: 'Plus Jakarta Sans'; font-display: swap; }
+      @font-face { font-family: 'Inter'; font-display: swap; }
+      @font-face { font-family: 'JetBrains Mono'; font-display: swap; }
+    </style>
+  </head>
+  <body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Cegah pinch-to-zoom & double-tap zoom di mobile, KECUALI pada photo viewer -->
+    <script>
+      (function () {
+        function isZoomAllowed(target) {
+          return !!(target && (target.closest('[data-allow-zoom="true"]') || target.closest('.photo-zoom-container')));
+        }
+        document.addEventListener('gesturestart', function (e) {
+          if (!isZoomAllowed(e.target)) e.preventDefault();
+        }, { passive: false });
+        document.addEventListener('gesturechange', function (e) {
+          if (!isZoomAllowed(e.target)) e.preventDefault();
+        }, { passive: false });
+        document.addEventListener('gestureend', function (e) {
+          if (!isZoomAllowed(e.target)) e.preventDefault();
+        }, { passive: false });
+        document.addEventListener('touchmove', function (e) {
+          if (e.touches.length > 1 && !isZoomAllowed(e.target)) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+        var lastTouch = 0;
+        document.addEventListener('touchend', function (e) {
+          var now = Date.now();
+          if (now - lastTouch <= 300 && !isZoomAllowed(e.target)) {
+            e.preventDefault();
+          }
+          lastTouch = now;
+        }, { passive: false });
+      })();
+    </script>
+  </body>
+</html>

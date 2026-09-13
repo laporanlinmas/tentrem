@@ -1,0 +1,32 @@
+{
+  "functions": {
+    "api/submit-complaint.ts": { "maxDuration": 60 },
+    "api/submit-survey.ts":    { "maxDuration": 30 }
+  },
+  "rewrites": [
+    { "source": "/profil", "destination": "/api/share-page?path=/profil" },
+    { "source": "/profil-desa", "destination": "/api/share-page?path=/profil" },
+    { "source": "/video", "destination": "/api/share-page?path=/profil" },
+    { "source": "/berita", "destination": "/api/share-page?path=/berita" },
+    { "source": "/berita/:slug*", "destination": "/api/share-page?path=/berita&slug=:slug*" },
+    { "source": "/aduan", "destination": "/api/share-page?path=/aduan" },
+    { "source": "/pengaduan", "destination": "/api/share-page?path=/aduan" },
+    { "source": "/struktur", "destination": "/api/share-page?path=/struktur" },
+    { "source": "/struktur-organisasi", "destination": "/api/share-page?path=/struktur" },
+    { "source": "/galeri", "destination": "/api/share-page?path=/galeri" },
+    { "source": "/galeri-kegiatan", "destination": "/api/share-page?path=/galeri" },
+    { "source": "/kentongan", "destination": "/api/share-page?path=/kentongan" },
+    { "source": "/isyarat-kentongan", "destination": "/api/share-page?path=/kentongan" },
+    { "source": "/peta", "destination": "/api/share-page?path=/peta" },
+    { "source": "/peta-wilayah", "destination": "/api/share-page?path=/peta" },
+    { "source": "/survei", "destination": "/api/share-page?path=/survei" },
+    { "source": "/kritik-saran", "destination": "/api/share-page?path=/survei" },
+    { "source": "/survey", "destination": "/api/share-page?path=/survei" },
+    { "source": "/cuaca", "destination": "/api/share-page?path=/cuaca" },
+    { "source": "/prakiraan-cuaca", "destination": "/api/share-page?path=/cuaca" },
+    { "source": "/jadwal-ronda", "destination": "/api/share-page?path=/jadwal-ronda" },
+    { "source": "/rincian-tugas", "destination": "/api/share-page?path=/rincian-tugas" },
+    { "source": "/tupoksi", "destination": "/api/share-page?path=/rincian-tugas" },
+    { "source": "/inventaris", "destination": "/api/share-page?path=/inventaris" }
+  ]
+}
