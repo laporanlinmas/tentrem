@@ -104,6 +104,18 @@ export const DEFAULT_KONTAK_LIST_WEBSITE: KontakDaruratItem[] = [
   },
 ];
 
+function normalizePhoneNumber(value: string): string {
+  const digits = value.replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.length <= 6) return digits;
+  if (digits.startsWith('62')) return `+${digits}`;
+  return `+62${digits.startsWith('0') ? digits.slice(1) : digits}`;
+}
+
+function toWhatsAppNumber(value: string): string {
+  return normalizePhoneNumber(value).replace(/\D/g, '');
+}
+
 interface KontakDaruratSectionProps {
   title?: string;
   description?: string;
@@ -211,7 +223,7 @@ export default function KontakDaruratSection({
             <div className="flex flex-col sm:flex-row md:flex-col gap-3 min-w-[200px]">
               {piketConfig.noHp && (
                 <a
-                  href={`tel:${piketConfig.noHp}`}
+                  href={`tel:${normalizePhoneNumber(piketConfig.noHp)}`}
                   className="inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-2xl bg-white text-red-700 hover:bg-rose-50 text-sm font-black shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <PhoneCall className="w-4 h-4 text-red-600 animate-bounce" />
@@ -221,7 +233,7 @@ export default function KontakDaruratSection({
 
               {piketConfig.noWa && (
                 <a
-                  href={`https://wa.me/${piketConfig.noWa.replace(/\D/g, '')}?text=${encodeURIComponent(piketConfig.pesanWaTemplate || 'Halo Petugas Piket, saya butuh bantuan di: ')}`}
+                  href={`https://wa.me/${toWhatsAppNumber(piketConfig.noWa)}?text=${encodeURIComponent(piketConfig.pesanWaTemplate || 'Halo Petugas Piket, saya butuh bantuan di: ')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-black shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
@@ -272,6 +284,8 @@ export default function KontakDaruratSection({
             {filteredKontakDarurat.map((k) => {
               const nm = k.nama.toLowerCase();
               const jb = (k.jabatan || '').toLowerCase();
+              const phoneNumber = normalizePhoneNumber(k.noHp);
+              const whatsappNumber = k.noWa ? normalizePhoneNumber(k.noWa) : '';
               const accent = 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900';
 
               // Tentukan logo path berdasarkan nama/id instansi
@@ -318,15 +332,15 @@ export default function KontakDaruratSection({
                     <div className="space-y-0.5">
                       {k.noHp && (
                         <a
-                          href={`tel:${k.noHp}`}
+                          href={`tel:${phoneNumber}`}
                           className="text-sm font-black text-slate-800 dark:text-slate-100 hover:text-red-600 dark:hover:text-red-400 transition-colors font-mono"
                         >
-                          <span className="tracking-wider">{k.noHp}</span>
+                          <span className="tracking-wider">{phoneNumber}</span>
                         </a>
                       )}
-                      {k.noWa && k.noWa !== k.noHp && (
+                      {whatsappNumber && whatsappNumber !== phoneNumber && (
                         <div className="text-sm text-emerald-600 dark:text-emerald-400 font-black font-mono">
-                          <span className="tracking-wider">{k.noWa}</span>
+                          <span className="tracking-wider">{whatsappNumber}</span>
                         </div>
                       )}
                     </div>
@@ -336,7 +350,7 @@ export default function KontakDaruratSection({
                   <div className="px-4 pb-4 flex items-center gap-2 mt-auto">
                     {k.noHp && (
                       <a
-                        href={`tel:${k.noHp}`}
+                        href={`tel:${phoneNumber}`}
                         className="flex-1 inline-flex items-center justify-center px-3 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-black transition-colors shadow-sm"
                       >
                         Telepon
@@ -344,7 +358,7 @@ export default function KontakDaruratSection({
                     )}
                     {k.noWa && (
                       <a
-                        href={`https://wa.me/${k.noWa.replace(/\D/g, '')}`}
+                        href={`https://wa.me/${toWhatsAppNumber(k.noWa)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 inline-flex items-center justify-center px-3 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black transition-colors shadow-sm"
