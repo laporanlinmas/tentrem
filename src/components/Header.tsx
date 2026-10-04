@@ -116,6 +116,15 @@ export default function Header({
   // ── Nav click ────────────────────────────────────────────────────────────
   const handleNavClick = (id: string) => {
     setSidebarOpen(false);
+    if (id === 'home' && currentPage === 'home') {
+      const scrollToTop = () => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      };
+      if (sidebarOpen) window.setTimeout(scrollToTop, 0);
+      else scrollToTop();
+      return;
+    }
     if (onNavigate) {
       onNavigate(id);
     } else {
